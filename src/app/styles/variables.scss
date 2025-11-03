@@ -1,0 +1,67 @@
+$font-family-base: 'Lato', 'Roboto', 'Open Sans', 'sans-serif';
+$font-family-base-variant: 'Roboto', 'Lato', 'Open Sans', 'sans-serif';
+
+$font-size-base: 1rem;
+$font-weight-light: 300;
+$font-weight-normal: 400; 
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+:root {
+  --font-family-base: #{$font-family-base};
+  --font-family-base-variant: #{$font-family-base-variant};
+
+  --font-size-base: #{$font-size-base};
+  --font-weight-light: #{$font-weight-light};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-bold: #{$font-weight-bold};
+}
+
+:root {
+  --mui-color-primary-main: #1976d2;
+  --mui-color-primary-light: #42a5f5;
+  --mui-color-primary-dark: #1565c0;
+  --mui-color-primary-contrastText: #fff;
+
+  --mui-color-secondary-main: #9c27b0;
+  --mui-color-secondary-light: #ba68c8;
+  --mui-color-secondary-dark: #7b1fa2;
+  --mui-color-secondary-contrastText: #fff;
+
+  --mui-color-error-main: #d32f2f;
+  --mui-color-error-light: #ef5350;
+  --mui-color-error-dark: #c62828;
+  --mui-color-error-contrastText: #fff;
+
+  --mui-color-warning-main: #ed6c02;
+  --mui-color-warning-light: #ff9800;
+  --mui-color-warning-dark: #e65100;
+  --mui-color-warning-contrastText: #fff;
+
+  --mui-color-info-main: #0288d1;
+  --mui-color-info-light: #03a9f4;
+  --mui-color-info-dark: #01579b;
+  --mui-color-info-contrastText: #fff;
+
+  --mui-color-success-main: #2e7d32;
+  --mui-color-success-light: #4caf50;
+  --mui-color-success-dark: #1b5e20;
+  --mui-color-success-contrastText: #fff;
+
+  --mui-color-grey-50: #fafafa;
+  --mui-color-grey-100: #f5f5f5;
+  --mui-color-grey-200: #eeeeee;
+  --mui-color-grey-300: #e0e0e0;
+  --mui-color-grey-400: #bdbdbd;
+  --mui-color-grey-500: #9e9e9e;
+  --mui-color-grey-600: #757575;
+  --mui-color-grey-700: #616161;
+  --mui-color-grey-800: #424242;
+  --mui-color-grey-900: #212121;
+  
+  --mui-color-grey-A100: #f5f5f5;
+  --mui-color-grey-A200: #eeeeee;
+  --mui-color-grey-A400: #bdbdbd;
+  --mui-color-grey-A700: #616161;
+}
