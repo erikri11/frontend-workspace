@@ -12,8 +12,21 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {},
+    "baseUrl": "./src", // Adjusted baseUrl to point to src directory
+    "paths": { // Added path aliases
+      "@components/*": ["app/components/*"],
+      "@common/*": ["app/components/common/*"],
+      "@layout/*": ["app/components/layout/*"],
+      "@pages/*": ["app/components/pages/*"],
+      "@hooks/*": ["app/hooks/*"],
+      "@context/*": ["app/context/*"],
+      "@services/*": ["app/services/*"],
+      "@utils/*": ["app/utils/*"],
+      "@types/*": ["app/types/*"],
+      "@assets/*": ["app/assets/*"],
+      "@styles/*": ["app/styles/*"],
+      "@routes/*": ["app/routes/*"]
+    },
     "jsx": "react-jsx",
     "allowJs": false,
     "esModuleInterop": false,
