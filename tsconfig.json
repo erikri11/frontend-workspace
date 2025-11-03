@@ -14,18 +14,19 @@
     "skipDefaultLibCheck": true,
     "baseUrl": "./src", // Adjusted baseUrl to point to src directory
     "paths": { // Added path aliases
-      "@components/*": ["app/components/*"],
-      "@common/*": ["app/components/common/*"],
-      "@layout/*": ["app/components/layout/*"],
-      "@pages/*": ["app/components/pages/*"],
-      "@hooks/*": ["app/hooks/*"],
-      "@context/*": ["app/context/*"],
-      "@services/*": ["app/services/*"],
-      "@utils/*": ["app/utils/*"],
-      "@types/*": ["app/types/*"],
-      "@assets/*": ["app/assets/*"],
-      "@styles/*": ["app/styles/*"],
-      "@routes/*": ["app/routes/*"]
+      "@models/*": ["app/models/*"], // # TypeScript interfaces and types (City, Hotel, User)
+      "@enums/*": ["app/enums/*"], // # Enumerations (UserRole, SortOrder)
+      "@components/*": ["app/components/*"], // # Reusable UI components
+      "@common/*": ["app/components/common/*"], // # Reusable UI (Button, Card, Loader)
+      "@layout/*": ["app/components/layout/*"], // # Header, Footer, Navigation
+      "@pages/*": ["app/components/pages/*"], // # Page-level components (HomePage, CityPage)
+      "@hooks/*": ["app/hooks/*"], // # Custom hooks (useGeoLocation, useFetch)
+      "@context/*": ["app/context/*"], // # React contexts (Theme, User, Auth)
+      "@services/*": ["app/services/*"], // # API calls and network logic
+      "@utils/*": ["app/utils/*"], // # Helpers, formatters, constants, etc.
+      "@assets/*": ["app/assets/*"], // # Images, fonts, icons, etc.
+      "@styles/*": ["app/styles/*"], // # Global SCSS, variables, theme files
+      "@routes/*": ["app/routes/*"] // # React Router configuration
     },
     "jsx": "react-jsx",
     "allowJs": false,
