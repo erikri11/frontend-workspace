@@ -13,20 +13,25 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": "./src", // Adjusted baseUrl to point to src directory
-    "paths": { // Added path aliases
-      "@models/*": ["app/models/*"], // # TypeScript interfaces and types (City, Hotel, User)
-      "@enums/*": ["app/enums/*"], // # Enumerations (UserRole, SortOrder)
-      "@components/*": ["app/components/*"], // # Reusable UI components
-      "@common/*": ["app/components/common/*"], // # Reusable UI (Button, Card, Loader)
-      "@layout/*": ["app/components/layout/*"], // # Header, Footer, Navigation
-      "@pages/*": ["app/components/pages/*"], // # Page-level components (HomePage, CityPage)
-      "@hooks/*": ["app/hooks/*"], // # Custom hooks (useGeoLocation, useFetch)
-      "@context/*": ["app/context/*"], // # React contexts (Theme, User, Auth)
-      "@services/*": ["app/services/*"], // # API calls and network logic
-      "@utils/*": ["app/utils/*"], // # Helpers, formatters, constants, etc.
-      "@assets/*": ["app/assets/*"], // # Images, fonts, icons, etc.
-      "@styles/*": ["app/styles/*"], // # Global SCSS, variables, theme files
-      "@routes/*": ["app/routes/*"] // # React Router configuration
+    "paths": { 
+      "@app/config/*": ["app/config/*"], 
+      "@app/routes/*": ["app/routes/*"],
+      "@assets/*": ["assets/*"],
+      "@features/*": ["features/*"],
+      "@layouts/*": ["layouts/*"],
+      "@pages/*": ["pages/*"],
+      "@shared/*": ["shared/*"],
+      "@shared/components/*": ["shared/components/*"],
+      "@shared/constants/*": ["shared/constants/*"],
+      "@shared/context/*": ["shared/context/*"],
+      "@shared/enums/*": ["shared/enums/*"],
+      "@shared/hooks/*": ["shared/hooks/*"],
+      "@shared/services/*": ["shared/services/*"],
+      "@shared/styles/*": ["shared/styles/*"],
+      "@shared/theme/*": ["shared/theme/*"],
+      "@shared/types/*": ["shared/types/*"],
+      "@shared/utils/*": ["shared/utils/*"],
+      "@widgets/*": ["widgets/*"]
     },
     "jsx": "react-jsx",
     "allowJs": false,
