@@ -80,7 +80,7 @@ export function TaskGrid() {
   const headers: ColDef<ITask>[] = [
     { field: 'title', headerName: 'Title', minWidth: 180, filter: false, flex: 1, rowDrag: true},
     { field: 'dueDate', headerName: 'Due Date', minWidth: 140, filter: false, flex: 1},
-    { field: 'priority', headerName: 'Priority', width: 100, filter: 'agSetColumnFilter',
+    { field: 'priority', headerName: 'Priority', minWidth: 100, filter: 'agSetColumnFilter',
       cellRenderer: priorityChipRenderer,
       filterParams: {
         values: ['Low', 'Medium', 'High'],
@@ -90,13 +90,13 @@ export function TaskGrid() {
         }
       }
     },
-    { field: 'completed', headerName: 'Completed', width: 140,
+    { field: 'completed', headerName: 'Completed', minWidth: 140,
       cellRenderer: completedCheckboxRenderer
     },
-    { field: undefined, headerName: "",  width: 120,  filter: false,
+    { field: undefined, headerName: "",  minWidth: 200,  filter: false,
       cellRenderer: updateTaskButtonCellRenderer
     },
-    { field: undefined, headerName: "",  width: 120,  filter: false,
+    { field: undefined, headerName: "",  minWidth: 200,  filter: false,
       cellRenderer: deleteTaskButtonCellRenderer
     }
   ];
