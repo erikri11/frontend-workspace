@@ -2,6 +2,9 @@ import { StrictMode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
 import { CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { nb } from 'date-fns/locale';
 
 import '@shared/styles/variables';
 import '@shared/styles/global';
@@ -18,8 +21,10 @@ root.render(
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
+          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={nb}>
             <CssBaseline />
             <App />
+          </LocalizationProvider>
         </ThemeProvider>
       </StyledEngineProvider>
     </BrowserRouter>
