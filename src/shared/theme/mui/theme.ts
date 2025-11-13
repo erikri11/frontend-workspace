@@ -15,10 +15,7 @@ export const theme = createTheme({
     dark: true
   },
   typography: {
-    ...typography,
-  button: {},
-  caption: {},
-  overline: {} 
+    ...typography
   },
   palette: {
     ...palette
@@ -26,5 +23,14 @@ export const theme = createTheme({
   breakpoints: {},
   zIndex: {},
   transitions: {},
-  components: {}
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          minWidth: '140px'
+        }
+      }
+    }
+  }
 });
