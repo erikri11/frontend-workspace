@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { ColDef, ModuleRegistry, AllCommunityModule, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { LicenseManager, SetFilterModule } from 'ag-grid-enterprise';
-import { Box } from '@mui/material';
+import { Box, useColorScheme } from '@mui/material';
 import { baseTableTheme } from '@shared/theme/agGrid/baseTable';
 
 ModuleRegistry.registerModules([AllCommunityModule, SetFilterModule]);
@@ -17,6 +17,11 @@ interface DashboardLayoutProps<T> {
 
 export default function BaseTable<T>(props: DashboardLayoutProps<T>) {
   const onGridReady = (params: GridReadyEvent) => props.setGridApi(params.api);
+  const { mode } = useColorScheme();
+
+  const agTheme = useMemo(() => (
+    baseTableTheme(mode === 'dark' ? 'dark' : 'light')
+  ), [mode]);
 
   const defaultColDef = useMemo<ColDef<T>>(() => ({ 
     sortable: true,
@@ -28,7 +33,7 @@ export default function BaseTable<T>(props: DashboardLayoutProps<T>) {
   return (
     <Box style={{ height: 300, width: '100%' }}>
       <AgGridReact<T>
-        theme={baseTableTheme}
+        theme={agTheme}
         columnDefs={props.headers}
         rowData={props.data}
         defaultColDef={defaultColDef}

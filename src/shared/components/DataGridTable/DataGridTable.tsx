@@ -1,30 +1,31 @@
 import './DataGridTable.module.scss';
 import { useEffect, useState } from 'react';
 import { ColDef, GridApi } from 'ag-grid-community';
-import { Box } from '@mui/material';
 import BaseToolbar from '../BaseToolbar/BaseToolbar';
 import BaseTable from '../BaseTable/BaseTable';
 
 export interface DataGridTableProps<T> {
   data: T[];
   headers: ColDef<T>[];
+  isAddTaskButtonVisible?: boolean;
+  onAddTaskClick?: () => void;
 }
 
 export function DataGridTable<T>(props: DataGridTableProps<T>) {
   const [gridApi, setGridApi] = useState<GridApi | null>(null);
   const [quickFilter, setQuickFilter] = useState<string>("");
 
-   useEffect(() => {
+  useEffect(() => {
     gridApi?.setGridOption('quickFilterText', (quickFilter ?? '').trim());
   }, [quickFilter, gridApi]);
   
   return (
-    <Box>
-      {/* Additional components for the DataGridTable can be added here */}
-
+    <>
       <BaseToolbar 
         quickFilter={quickFilter}
         setQuickFilter={setQuickFilter}
+        isAddTaskButtonVisible={props.isAddTaskButtonVisible}
+        onAddTaskClick={props.onAddTaskClick}
       />
 
       <BaseTable 
@@ -33,7 +34,7 @@ export function DataGridTable<T>(props: DataGridTableProps<T>) {
         data={props.data} 
         headers={props.headers}
       />
-    </Box>
+    </> 
   );
 }
 
