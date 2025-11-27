@@ -12,9 +12,9 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": "./src", // Adjusted baseUrl to point to src directory
-    "paths": { 
-      "@app/config/*": ["app/config/*"], 
+    "baseUrl": "./src",
+    "paths": {
+      "@app/config/*": ["app/config/*"],
       "@app/routes/*": ["app/routes/*"],
       "@assets/*": ["assets/*"],
       "@features/*": ["features/*"],
@@ -48,8 +48,17 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
     }
   ],
   "compileOnSave": false,
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "moduleResolution": "node10"
+    }
+  }
 }

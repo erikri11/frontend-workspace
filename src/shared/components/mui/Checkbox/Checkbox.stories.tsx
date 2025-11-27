@@ -1,0 +1,59 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { Checkbox, CheckboxLabel, CheckboxProps } from './checkbox';
+
+const meta: Meta<CheckboxProps> = {
+   title: 'Shared/MUI/Checkbox',
+  component: Checkbox,
+  parameters: {
+    layout: 'centered',
+  },
+  argTypes: {
+    onChange: {action: 'changed'},
+    sx: { control: false },
+    classes: { control: false },
+    checkedIcon: { control: false },
+    defaultChecked: { control: false },
+    disableRipple: { control: false },
+    icon: { control: false },
+    indeterminateIcon: { control: false },
+    slotProps: { control: false },
+    slots: { control: false },
+    className: { control: false },
+    label: { control: false },
+    id: { control: false },
+    indeterminate: { control: false },
+    required: { control: false },
+    value: { control: false }
+  },
+  args: {
+    checked: false,
+    disabled: false,
+    color: 'primary',
+    size: 'medium'
+  }
+};
+
+export default meta;
+
+type Story = StoryObj<CheckboxProps>;
+
+export const Default: Story = {};
+
+export const Checked: Story = {
+  args: {
+    checked: true
+  }
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true
+  }
+};
+
+export const WithLabel: Story = {
+  render: (args) => <CheckboxLabel {...args} />,
+  args: {
+    label: 'Accept terms',
+  }
+};

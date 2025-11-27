@@ -20,7 +20,7 @@ root.render(
   <StrictMode>
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme} defaultMode='system'>
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={nb}>
             <CssBaseline />
             <App />

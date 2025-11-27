@@ -8,29 +8,32 @@ import '@fontsource/lato/700.css';
 
 import { createTheme } from '@mui/material/styles';
 import { typography } from './typography';
-import { palette } from './palette';
+import { MuiButton } from './components/MuiButton';
+import { darkPalette, lightPalette } from './palette';
 
 export const theme = createTheme({
   colorSchemes: {
-    dark: true
+    light: {
+      palette: {
+        ...lightPalette,
+      },
+    },
+    dark: {
+      palette: {
+        ...darkPalette,
+      },
+    },
   },
   typography: {
     ...typography
   },
   palette: {
-    ...palette
+    ...lightPalette
   },
   breakpoints: {},
   zIndex: {},
   transitions: {},
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: 'none',
-          minWidth: '140px'
-        }
-      }
-    }
-  }
+    ...MuiButton
+  } 
 });
