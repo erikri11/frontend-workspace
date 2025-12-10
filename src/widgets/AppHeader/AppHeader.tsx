@@ -1,21 +1,39 @@
 import './AppHeader.module.scss';
 import { AppBar, IconButton, Toolbar, Typography, useColorScheme } from '@mui/material';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
+import MenuIcon from "@mui/icons-material/Menu";
+import { Brightness4 , Brightness7 } from '@mui/icons-material';
 
-export function AppHeader() {
+interface AppHeaderProps {
+  onMenuClick: () => void;
+}
+
+export function AppHeader(props: AppHeaderProps) {
   const { mode, setMode } = useColorScheme();
   if (!mode) return null;
-  
+
   return (
-    <AppBar position="static" component="nav">
+    <AppBar
+      position="fixed"
+      sx={{
+        zIndex: (theme) => theme.zIndex.drawer + 1
+      }}>
       <Toolbar>
-        <Typography 
-          variant="h1" 
-          component="div" 
-          sx={{ flexGrow: 1 }}
-        >
-          Element Logic
+        <IconButton
+          aria-label="open drawer"
+          color="inherit"
+          edge="start"
+          onClick={props.onMenuClick}
+          sx={{ mr: 2, display: { sm: "none" } }}>
+          <MenuIcon />
+        </IconButton>
+        
+        <Typography
+          variant="h1"
+          component="div"
+          sx={{ flexGrow: 1 }}>
+            Sogelink Norway
         </Typography>
+      
         <IconButton
           color="inherit"
           onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}

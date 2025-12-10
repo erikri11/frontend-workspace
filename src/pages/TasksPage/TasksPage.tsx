@@ -7,8 +7,6 @@ export function TasksPage() {
   return (
    <Box>
       <PageTitle title="Tasks" subtitle="Manage your tasks efficiently" />
-      {/* Additional components for the TasksPage can be added here */}
-      {/* Skeleton */}
       <TaskGrid  />
     </Box>
   );

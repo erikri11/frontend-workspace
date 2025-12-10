@@ -15,7 +15,7 @@ export function AppFooter() {
       }}
     >
       <Typography variant="body2" color="text.secondary">
-        © {new Date().getFullYear()} Element Logic
+        © {new Date().getFullYear()} Sogelink Norway
       </Typography>
     </Box>
   );
