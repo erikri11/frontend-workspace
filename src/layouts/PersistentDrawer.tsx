@@ -2,51 +2,15 @@ import {Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, ListSubhe
 import { Link, useLocation } from "react-router-dom";
 import { MenuItem } from "@shared/types/menu";
 import { DRAWER_WIDTH } from "@shared/constants/layout";
+import { useContext } from "react";
+import { UserRightsContext } from "@shared/context/userRightsContext";
+import { checkMenuAccess } from "@shared/utils/access";
+import React from "react";
 
 interface PersistentDrawerProps {
   mobileOpen: boolean;
   onClose: () => void;
   menuItems: MenuItem[];
-}
-
-function PersistentDrawerContent(props: PersistentDrawerProps) {
-  const location = useLocation();
-
-  return (
-    <Box
-      sx={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column"
-      }}
-    >
-      {/* Push content below AppBar */}
-      <Toolbar />
-
-      <List
-        subheader={
-          <ListSubheader
-            component='div'
-            className='d-sm-none'>
-          Navigasjon
-          </ListSubheader>
-        }
-      >
-        {props.menuItems.map(i => (
-          <ListItemButton
-            component={Link}
-            to={i.url}
-            selected={"/" + location.pathname.split("/")[1] === i.url}
-            key={i.text}>
-            <ListItemIcon>
-              {i.icon}
-            </ListItemIcon>
-            <ListItemText primary={i.text} />
-          </ListItemButton>
-        ))}
-      </List>
-    </Box>
-  );
 }
 
 export function PersistentDrawer(props: PersistentDrawerProps) {
@@ -100,6 +64,52 @@ export function PersistentDrawer(props: PersistentDrawerProps) {
           onClose={props.onClose}
         />
       </Drawer>
+    </Box>
+  );
+}
+
+function PersistentDrawerContent(props: PersistentDrawerProps) {
+  const { role: userRole } = useContext(UserRightsContext);
+  const location = useLocation();
+  
+  return (
+    <Box
+      sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
+      {/* Push content below AppBar */}
+      <Toolbar />
+
+      <List
+        subheader={
+          <ListSubheader
+            component='div'
+            className='d-sm-none'>
+            Navigasjon
+          </ListSubheader>
+        }
+      >
+        {props.menuItems.map((i, index) => (
+          <React.Fragment key={index}>
+            {userRole && checkMenuAccess(
+              <ListItemButton
+                component={Link}
+                to={i.url}
+                selected={"/" + location.pathname.split("/")[1] === i.url}
+                key={i.text}>
+                <ListItemIcon>
+                  {i.icon}
+                </ListItemIcon>
+                <ListItemText primary={i.text} />
+              </ListItemButton>,
+              [userRole]
+            )}
+          </React.Fragment>
+        ))}
+      </List>
     </Box>
   );
 }
