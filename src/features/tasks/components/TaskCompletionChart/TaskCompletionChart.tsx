@@ -23,7 +23,7 @@ export function TaskCompletionChart(props: TaskCompletionChartProps) {
   }, [props.tasks]);
 
   return (
-    <Paper elevation={0} sx={{ p: 2 }}>
+    <Paper elevation={0} sx={{ py: 2 }}>
       <Typography variant="h5" gutterBottom>
         Tasks by priority
       </Typography>
