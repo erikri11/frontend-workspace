@@ -12,23 +12,23 @@ import { MuiButton } from './components/MuiButton';
 import { darkPalette, lightPalette } from './palette';
 
 export const theme = createTheme({
+  cssVariables: {
+    colorSchemeSelector: 'class'
+  },
   colorSchemes: {
     light: {
       palette: {
         ...lightPalette,
-      },
+      }
     },
     dark: {
       palette: {
         ...darkPalette,
-      },
-    },
+      }
+    }
   },
   typography: {
     ...typography
-  },
-  palette: {
-    ...lightPalette
   },
   breakpoints: {},
   zIndex: {},

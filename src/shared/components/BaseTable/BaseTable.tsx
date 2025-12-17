@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
-import { ColDef, ModuleRegistry, AllCommunityModule, GridApi, GridReadyEvent } from 'ag-grid-community';
+import {ColDef, ModuleRegistry, AllCommunityModule, GridApi, GridReadyEvent} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { LicenseManager, SetFilterModule } from 'ag-grid-enterprise';
-import { Box, useColorScheme } from '@mui/material';
+import { Box } from '@mui/material';
+import { useColorScheme } from '@mui/material/styles';
 import { baseTableTheme } from '@shared/theme/agGrid/baseTable';
 
 ModuleRegistry.registerModules([AllCommunityModule, SetFilterModule]);
-LicenseManager.setLicenseKey("LICENSE_KEY_HERE");
+LicenseManager.setLicenseKey('LICENSE_KEY_HERE');
 
 interface DashboardLayoutProps<T> {
   data: T[];
@@ -16,19 +17,26 @@ interface DashboardLayoutProps<T> {
 }
 
 export default function BaseTable<T>(props: DashboardLayoutProps<T>) {
+  const { mode, systemMode } = useColorScheme();
   const onGridReady = (params: GridReadyEvent) => props.setGridApi(params.api);
-  const { mode } = useColorScheme();
 
-  const agTheme = useMemo(() => (
-    baseTableTheme(mode === 'dark' ? 'dark' : 'light')
-  ), [mode]);
+  // Always resolve to a valid mode (never undefined)
+  const effectiveMode: 'light' | 'dark' = useMemo(() => {
+    if (mode === 'dark') return 'dark';
+    if (mode === 'light') return 'light';
 
-  const defaultColDef = useMemo<ColDef<T>>(() => ({ 
-    sortable: true,
-    filter: true,
-    resizable: true,
-    flex: 1,
-  }), []);
+    return systemMode === 'dark' ? 'dark' : 'light';
+  },[mode, systemMode]);
+
+  const agTheme = useMemo(() => baseTableTheme(effectiveMode), [effectiveMode]);
+
+  const defaultColDef = useMemo<ColDef<T>>(() => ({
+      sortable: true,
+      filter: true,
+      resizable: true,
+      flex: 1,
+    }),[]
+  );
 
   return (
     <Box style={{ height: 300, width: '100%' }}>

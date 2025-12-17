@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
 import { CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
+import { UserRightsProvider } from '@shared/context/UserRightsProvider';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { nb } from 'date-fns/locale';
@@ -20,10 +21,12 @@ root.render(
   <StrictMode>
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme} defaultMode='system'>
+        <ThemeProvider theme={theme} defaultMode="system" storageManager={null}>
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={nb}>
-            <CssBaseline />
-            <App />
+            <UserRightsProvider>
+              <CssBaseline />
+              <App />
+            </UserRightsProvider>
           </LocalizationProvider>
         </ThemeProvider>
       </StyledEngineProvider>

@@ -38,21 +38,19 @@ export const basePalette = {
 };
 
 export const lightPalette = {
-  // ...basePalette,
   customGrey: {
-    main: '#9e9e9e',
-    light: '#e0e0e0',
-    dark: '#616161',
+    main: '#e0e0e0',
+    light: '#e6e6e6',
+    dark: '#9c9c9c',
     contrastText: '#000',
   },
 };
 
 export const darkPalette = {
-  // ...basePalette,
   customGrey: {
-    main: '#bdbdbd',
-    light: '#e0e0e0',
-    dark: '#757575',
+    main: '#424242',
+    light: '#616161',
+    dark: '#212121',
     contrastText: '#fff',
   },
 };
