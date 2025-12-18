@@ -1,0 +1,18 @@
+{
+  "pageTitle": {
+    "title": "Oppgaver",
+    "subtitle": "Administrer oppgavene dine effektivt"
+  },
+  "addTask": {
+    "label": "Legg til oppgave"
+  },
+  "tasksByPriority": {
+    "header": "Oppgaver etter prioritet",
+    "high": "Høy prioritet",
+    "medium": "Middels prioritet",
+    "low": "Lav prioritet",
+    "completed": "Fullført",
+    "active": "Aktiv"
+  }
+}
+  

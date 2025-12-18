@@ -1,4 +1,5 @@
 import './BaseToolbar.module.scss';
+import { useTranslation } from 'react-i18next';
 import { Add } from '@mui/icons-material';
 import { Button, Divider, Stack, TextField } from '@mui/material';
 
@@ -10,12 +11,13 @@ export interface BaseToolbarProps {
 }
 
 export function BaseToolbar(props: BaseToolbarProps) {
+  const { t } = useTranslation(['common', 'tasks']);
   const search = (e: React.ChangeEvent<HTMLInputElement>) => props.setQuickFilter(e.target.value);
 
   return (
     <Stack direction="row" spacing={2} className='mb-3'>
       <TextField
-        label="Søk"
+        label={t('common:search')}
         type="search"
         name='quickFilter'
         variant='filled'
@@ -31,7 +33,7 @@ export function BaseToolbar(props: BaseToolbarProps) {
           startIcon={<Add />}
           onClick={props.onAddTaskClick}
         >
-          Add Task
+          {t('tasks:addTask.label')}
         </Button>
       </>}
     </Stack>

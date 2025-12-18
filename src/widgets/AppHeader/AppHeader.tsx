@@ -3,6 +3,7 @@ import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { useColorScheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Brightness4, Brightness7, BrightnessAuto } from '@mui/icons-material';
+import LanguageToggle from '@shared/components/LanguageToggle/LanguageToggle';
 
 interface AppHeaderProps {
   onMenuClick: () => void;
@@ -52,6 +53,8 @@ export function AppHeader(props: AppHeaderProps) {
         <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
           Sogelink Norway
         </Typography>
+
+        <LanguageToggle />
 
         <IconButton
           color="inherit"

@@ -1,9 +1,10 @@
 import './TaskGrid.module.scss';
 import { useEffect, useState} from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, Checkbox, Chip } from '@mui/material';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import DataGridTable from '@shared/components/DataGridTable/DataGridTable';
-import { PRIORITY_COLOR } from '@shared/types/task';
+import { PRIORITIES, PRIORITY_COLOR } from '@shared/types/task';
 import { ITask } from '@features/tasks/models/task';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import TaskUpsertDialog from '../TaskUpsertDialog/TaskUpsertDialog';
@@ -11,6 +12,7 @@ import TaskDeleteDialog from '../TaskDeleteDialog/TaskDeleteDialog';
 import TaskCompletionChart from '../TaskCompletionChart/TaskCompletionChart';
 
 export function TaskGrid() {
+  const { t } = useTranslation('tasks');
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [isAddTaskDialogOpen, setIsAddTaskDialogOpen] = useState(false);
   const [updateTask, setUpdateTask] = useState<ITask | undefined>(undefined);
@@ -83,7 +85,7 @@ export function TaskGrid() {
     { field: 'priority', headerName: 'Priority', minWidth: 100, filter: 'agSetColumnFilter',
       cellRenderer: priorityChipRenderer,
       filterParams: {
-        values: ['Low', 'Medium', 'High'],
+        values: PRIORITIES,
         comparator: (a: string, b: string) => {
           const order = ['Low', 'Medium', 'High'];
           return order.indexOf(a) - order.indexOf(b);

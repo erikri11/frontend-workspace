@@ -7,6 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { nb } from 'date-fns/locale';
 
+import '@shared/i18n/i18n';
 import '@shared/styles/variables';
 import '@shared/styles/global';
 

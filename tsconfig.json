@@ -3,7 +3,7 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -31,6 +31,7 @@
       "@shared/theme/*": ["shared/theme/*"],
       "@shared/types/*": ["shared/types/*"],
       "@shared/utils/*": ["shared/utils/*"],
+      "@shared/i18n/*": ["shared/i18n/*"],
       "@widgets/*": ["widgets/*"]
     },
     "jsx": "react-jsx",
@@ -38,7 +39,9 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "resolveJsonModule": true,
+    "moduleResolution": "bundler"
   },
   "files": [],
   "include": [],

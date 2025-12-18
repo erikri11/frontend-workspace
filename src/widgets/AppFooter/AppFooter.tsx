@@ -6,12 +6,14 @@ export function AppFooter() {
     <Box
       component="footer"
       sx={{
-        bgcolor: 'customGrey.main',
-        textAlign: "center",
-        py: 2
+        py: 2,
+        backgroundColor: (theme) =>
+          theme.vars?.palette.customGrey?.main,
+        color: (theme) =>
+          theme.vars?.palette.customGrey?.contrastText
       }}
     >
-      <Typography variant="body2" color="text.secondary">
+      <Typography variant="body2" align="center">
         © {new Date().getFullYear()} Sogelink Norway
       </Typography>
     </Box>

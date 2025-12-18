@@ -5,8 +5,8 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import GroupsIcon from '@mui/icons-material/Groups';
 
 export const menuItems: MenuItem[] = [
-  { text: "Dashboard", url: "/dashboard", icon: <DashboardIcon /> },
-  { text: "Orders", url: "/orders", icon: <StoreIcon /> },
-  { text: "Products", url: "/admin/products", icon: <InventoryIcon /> },
-  { text: "Customers", url: "/admin/customers", icon: <GroupsIcon /> }
+  { textKey: "menu.dashboard", url: "/dashboard", icon: <DashboardIcon /> },
+  { textKey: "menu.orders", url: "/orders", icon: <StoreIcon /> },
+  { textKey: "menu.products", url: "/admin/products", icon: <InventoryIcon /> },
+  { textKey: "menu.customers", url: "/admin/customers", icon: <GroupsIcon /> }
 ];

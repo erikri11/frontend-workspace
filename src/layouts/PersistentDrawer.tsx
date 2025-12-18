@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { UserRightsContext } from "@shared/context/userRightsContext";
 import { checkMenuAccess } from "@shared/utils/access";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface PersistentDrawerProps {
   mobileOpen: boolean;
@@ -71,6 +72,8 @@ export function PersistentDrawer(props: PersistentDrawerProps) {
 function PersistentDrawerContent(props: PersistentDrawerProps) {
   const { role: userRole } = useContext(UserRightsContext);
   const location = useLocation();
+  const { t } = useTranslation('menu');
+
   
   return (
     <Box
@@ -99,11 +102,11 @@ function PersistentDrawerContent(props: PersistentDrawerProps) {
                 component={Link}
                 to={i.url}
                 selected={"/" + location.pathname.split("/")[1] === i.url}
-                key={i.text}>
+                key={i.textKey}>
                 <ListItemIcon>
                   {i.icon}
                 </ListItemIcon>
-                <ListItemText primary={i.text} />
+                <ListItemText primary={t(i.textKey)} />
               </ListItemButton>,
               [userRole]
             )}

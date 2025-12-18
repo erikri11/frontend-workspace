@@ -1,4 +1,5 @@
 import './TaskCompletionChart.module.scss';
+import { useTranslation } from 'react-i18next';
 import { Box, Paper, Typography, useTheme } from '@mui/material';
 import { PRIORITIES } from '@shared/types/task';
 import { ITask } from '@features/tasks/models/task';
@@ -11,6 +12,7 @@ interface TaskCompletionChartProps {
 
 export function TaskCompletionChart(props: TaskCompletionChartProps) {
   const theme = useTheme();
+  const { t } = useTranslation('tasks');
 
   const { completedCounts, activeCounts } = useMemo(() => {
     const completed = PRIORITIES.map(
@@ -23,9 +25,9 @@ export function TaskCompletionChart(props: TaskCompletionChartProps) {
   }, [props.tasks]);
 
   return (
-    <Paper elevation={0} sx={{ py: 2 }}>
+    <Paper elevation={0} sx={{ py: 3 }}>
       <Typography variant="h5" gutterBottom>
-        Tasks by priority
+        {t('tasks:tasksByPriority.header')}
       </Typography>
 
       <Box sx={{ height: 260 }}>
@@ -39,12 +41,12 @@ export function TaskCompletionChart(props: TaskCompletionChartProps) {
           ]}
           series={[
             {
-              label: 'Completed',
+              label: t('tasks:tasksByPriority.completed'),
               data: completedCounts,
               color: theme.palette.success.main
             },
             {
-              label: 'Active',
+              label: t('tasks:tasksByPriority.active'),
               data: activeCounts,
               color: theme.palette.error.main
             }

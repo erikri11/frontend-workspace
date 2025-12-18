@@ -39,7 +39,7 @@ export default function BaseTable<T>(props: DashboardLayoutProps<T>) {
   );
 
   return (
-    <Box style={{ height: 300, width: '100%' }}>
+    <Box style={{ width: '100%' }}>
       <AgGridReact<T>
         theme={agTheme}
         columnDefs={props.headers}
@@ -50,6 +50,7 @@ export default function BaseTable<T>(props: DashboardLayoutProps<T>) {
         headerHeight={48}
         rowDragManaged={true}
         onGridReady={onGridReady}
+        domLayout={'autoHeight'}
       />
     </Box>
   );

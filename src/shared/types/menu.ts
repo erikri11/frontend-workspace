@@ -1,5 +1,5 @@
 export interface MenuItem {
-  text: string;
+  textKey: string;
   url: string;
   icon?: React.ReactNode;
 }
