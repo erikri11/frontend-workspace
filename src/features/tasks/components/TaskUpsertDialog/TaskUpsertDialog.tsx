@@ -64,15 +64,16 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
       if (props.mode === 'add') {
         await TasksApi.post(task);
         console.log('Adding task:', task);
-        setSnackbarMessage({ content: t("Testing... TaskAdd"), type: "success" });
+        setSnackbarMessage({ content: t("tasks:snackbar.addSuccess"), type: "success" });
       } else if (props.mode === 'edit' && props.taskId) {
         await TasksApi.put(props.taskId, task);
         console.log('Updating task:', task);
-        setSnackbarMessage({ content: t("Testing... TaskEdit"), type: "info" });
+        setSnackbarMessage({ content: t("tasks:snackbar.editSuccess"), type: "success" });
       }
       props.onClose();
     } catch (error) {
       console.error('Error upserting task:', error);
+      setSnackbarMessage({ content: t("tasks:snackbar.editError"), type: "error" });
     }
   };
 

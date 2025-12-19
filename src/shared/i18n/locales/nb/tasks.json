@@ -13,5 +13,11 @@
     "medium": "Middels",
     "low": "Lav"
   },
-  "selectAPriority": "Velg en prioritet"
+  "selectAPriority": "Velg en prioritet",
+  "snackbar": {
+    "addSuccess": "Oppgave lagt til",
+    "editSuccess": "Oppgave oppdatert",
+    "deleteSuccess": "Oppgave slettet",
+    "deleteError": "Feil ved sletting av oppgave"
+  }
 }

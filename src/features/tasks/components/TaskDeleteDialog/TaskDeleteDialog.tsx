@@ -14,7 +14,7 @@ export interface TaskDeleteDialogProps {
 }
 
 export function TaskDeleteDialog(props: TaskDeleteDialogProps) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'tasks']);
   const { setSnackbarMessage } = useContext(SnackbarContext);
   
   const handleDeleteTask = async () => { 
@@ -22,11 +22,12 @@ export function TaskDeleteDialog(props: TaskDeleteDialogProps) {
       if (props.deleteTask?.id) {
         await TasksApi.delete(props.deleteTask.id);
         console.log('Deleting task with id:', props.deleteTask.id);
-        setSnackbarMessage({ content: t("Testing... TaskDelete"), type: "error" });
+        setSnackbarMessage({ content: t("tasks:snackbar.deleteSuccess"), type: "success" });
       }
       props.onClose();
     } catch (error) {
       console.error('Error deleting task:', error);
+      setSnackbarMessage({ content: t("tasks:snackbar.deleteError"), type: "error" });
     }
   };
 
