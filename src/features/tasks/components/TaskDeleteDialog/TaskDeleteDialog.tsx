@@ -1,8 +1,11 @@
 import './TaskDeleteDialog.module.scss';
+import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 import { theme } from '@shared/theme/mui/theme';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import { ITask } from '@features/tasks/models/task';
+import { SnackbarContext } from '@shared/context/snackbarContext';
 
 export interface TaskDeleteDialogProps {
   open: boolean;
@@ -11,11 +14,15 @@ export interface TaskDeleteDialogProps {
 }
 
 export function TaskDeleteDialog(props: TaskDeleteDialogProps) {
+  const { t } = useTranslation('common');
+  const { setSnackbarMessage } = useContext(SnackbarContext);
+  
   const handleDeleteTask = async () => { 
     try {
       if (props.deleteTask?.id) {
         await TasksApi.delete(props.deleteTask.id);
         console.log('Deleting task with id:', props.deleteTask.id);
+        setSnackbarMessage({ content: t("Testing... TaskDelete"), type: "error" });
       }
       props.onClose();
     } catch (error) {
@@ -25,25 +32,28 @@ export function TaskDeleteDialog(props: TaskDeleteDialogProps) {
 
   return (
     <Dialog 
-    open={props.open} 
-    onClose={props.onClose}>
-      <DialogTitle>Confirm delete</DialogTitle>
+      open={props.open} 
+      onClose={props.onClose}
+    >
+      <DialogTitle>{t('common:confirmDelete')}</DialogTitle>
       <DialogContent>
         <Typography sx={{ mt: 1 }}>
-          Are you sure you want to delete this item?
+          {t('common:confirmDeleteMessage')}
           </Typography>
         <Typography sx={{ mt: 1 }} color={theme.typography.subtitle2.color}>
           {props.deleteTask?.title}
           </Typography>
       </DialogContent>
       <DialogActions>
-        <Button variant="outlined" onClick={props.onClose}>Cancel</Button>
+        <Button variant="outlined" onClick={props.onClose}>
+          {t('common:cancel')}
+        </Button>
         <Button 
           variant="contained" 
           color="error" 
           onClick={handleDeleteTask}
         >
-          Delete
+          {t('common:delete')}
         </Button>
       </DialogActions>
     </Dialog>

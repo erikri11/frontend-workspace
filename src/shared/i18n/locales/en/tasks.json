@@ -3,15 +3,15 @@
     "title": "Tasks",
     "subtitle": "Manage your tasks efficiently"
   },
-  "addTask": {
-    "label": "Add Task"
+  "actions": {
+    "add": "Add task",
+    "edit": "Edit task"
   },
   "tasksByPriority": {
     "header": "Tasks by Priority",
-    "high": "High Priority",
-    "medium": "Medium Priority",
-    "low": "Low Priority",
-    "completed": "Completed",
-    "active": "Active"
-  }
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "selectAPriority": "Select a priority"
 }

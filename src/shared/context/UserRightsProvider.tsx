@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { RoleEnum } from "@shared/enums/role";
 import { UserRightsContext } from "./userRightsContext";
 
 const initialRole = RoleEnum.USER;
 
 export interface UserRightsProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function UserRightsProvider(props: UserRightsProviderProps) {
   const [role, setRole] = useState<RoleEnum>(initialRole);
 
   return (
-    <UserRightsContext value={{ role, setRole }}>
+    <UserRightsContext.Provider value={{ role, setRole }}>
       {props.children}
-    </UserRightsContext>
+    </UserRightsContext.Provider>
   );
 }

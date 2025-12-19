@@ -1,18 +1,16 @@
 import { StrictMode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
-import { CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
-import { UserRightsProvider } from '@shared/context/UserRightsProvider';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { nb } from 'date-fns/locale';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 
 import '@shared/i18n/i18n';
 import '@shared/styles/variables';
 import '@shared/styles/global';
 
+import { AppProviders } from './app/AppProviders';
 import App from './app/app';
 import { theme } from '@shared/theme/mui/theme';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -23,14 +21,12 @@ root.render(
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme} defaultMode="system">
-          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={nb}>
-            <UserRightsProvider>
-              <CssBaseline />
-              <App />
-            </UserRightsProvider>
-          </LocalizationProvider>
+          <AppProviders>
+            <App />
+          </AppProviders>
         </ThemeProvider>
       </StyledEngineProvider>
     </BrowserRouter>
   </StrictMode>
 );
+

@@ -33,7 +33,7 @@ export function BaseToolbar(props: BaseToolbarProps) {
           startIcon={<Add />}
           onClick={props.onAddTaskClick}
         >
-          {t('tasks:addTask.label')}
+          {t('tasks:actions.add')}
         </Button>
       </>}
     </Stack>

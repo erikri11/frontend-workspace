@@ -5,8 +5,8 @@ interface ITask {
   completed?: boolean;
 }
 
-const PRIORITIES = ['Low', 'Medium', 'High'];
-const isPriority = (p: string) => PRIORITIES.includes(p);
+const PRIORITY_ORDER = ['Low', 'Medium', 'High'];
+const isPriority = (p: string) => PRIORITY_ORDER.includes(p);
 const isISODate = (s: string) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
 
 export function validateCreate(body: ITask) {

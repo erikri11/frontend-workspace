@@ -1,14 +1,17 @@
 import './TaskUpsertDialog.module.scss';
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, useContext, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { format} from 'date-fns';
-import { PRIORITIES, Priority } from '@shared/types/task';
+import { PRIORITY_ORDER, Priority } from '@shared/types/task';
 import { validateDueDate, validatePriority, validateTitle } from '@features/tasks/validation/validateTask';
 import { Mode } from '@features/tasks/models/mode';
 import { ITaskError } from '@features/tasks/models/taskError';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import { ITask } from '@features/tasks/models/task';
+import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
+import { SnackbarContext } from '@shared/context/snackbarContext';
 
 export interface TaskUpsertDialogProps {
   open: boolean;
@@ -19,10 +22,12 @@ export interface TaskUpsertDialogProps {
 }
 
 export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
+  const { t } = useTranslation('tasks');
   const [title, setTitle] = useState<string>(props.initialTasks?.title || '');
   const [dueDate, setDueDate] = useState<Date | null>(props.initialTasks ? new Date(props.initialTasks.dueDate) : null);
   const [priority, setPriority] = useState<Priority | ''>(props.initialTasks?.priority || '');
   const [errors, setErrors] = useState<ITaskError>({});
+  const { setSnackbarMessage } = useContext(SnackbarContext);
 
   const canSubmit = useMemo(() => {
     const err = {
@@ -59,9 +64,11 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
       if (props.mode === 'add') {
         await TasksApi.post(task);
         console.log('Adding task:', task);
+        setSnackbarMessage({ content: t("Testing... TaskAdd"), type: "success" });
       } else if (props.mode === 'edit' && props.taskId) {
         await TasksApi.put(props.taskId, task);
         console.log('Updating task:', task);
+        setSnackbarMessage({ content: t("Testing... TaskEdit"), type: "info" });
       }
       props.onClose();
     } catch (error) {
@@ -76,13 +83,15 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
         fullWidth 
         maxWidth="sm"
       >
-        <DialogTitle>{props.mode === 'add' ? 'Add Task' : 'Edit Task'}</DialogTitle>
+        <DialogTitle>
+          {props.mode === 'add' ? t('tasks:actions.add') : t('tasks:actions.edit')}
+        </DialogTitle>
         <DialogContent className='pt-3'>
           <Grid container spacing={2}>
             <Grid size={{ md: 6 }}>
               <Stack useFlexGap spacing={2}>
                 <TextField
-                  label="Title"
+                  label={t('common:title')}
                   value={title || ''}
                   fullWidth
                   onChange={handleTitleChange}
@@ -90,7 +99,7 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
                   helperText={errors.title}
                 />
                 <DatePicker
-                  label="Due date"
+                  label={t('common:dueDate')}
                   value={dueDate || null}
                   onChange={(d) => setDueDate(d)}
                   slotProps={{
@@ -105,13 +114,15 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
                   <InputLabel id="priority-label">Prioritet</InputLabel>
                   <Select
                     labelId="priority-label"
-                    label="Priority"
+                    label={t('common:priority')}
                     value={priority}
                     onChange={handlePriorityChange}
                   >
-                    <MenuItem value="" disabled><em>Select a priority</em></MenuItem>
-                    {PRIORITIES.map((p: Priority) => (
-                      <MenuItem key={p} value={p}>{p}</MenuItem>
+                    <MenuItem value="" disabled><em>{t('tasks:selectAPriority')}</em></MenuItem>
+                    {PRIORITY_ORDER.map((p: Priority) => (
+                      <MenuItem key={p} value={p}>
+                        {getPriorityLabel(t, p)}
+                      </MenuItem>
                     ))}
                   </Select>
                   <FormHelperText error>{errors.priority}</FormHelperText>
@@ -121,9 +132,9 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" onClick={props.onClose}>Cancel</Button>
+          <Button variant="outlined" onClick={props.onClose}>{t('common:cancel')}</Button>
           <Button variant="contained" onClick={handleUpsertTask} disabled={!canSubmit}>
-            {props.mode === 'add' ? 'Add' : 'Save'}
+            {props.mode === 'add' ? t('common:add') : t('common:save')}
           </Button>
         </DialogActions>
       </Dialog>

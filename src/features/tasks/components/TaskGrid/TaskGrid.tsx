@@ -4,15 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { Button, Checkbox, Chip } from '@mui/material';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import DataGridTable from '@shared/components/DataGridTable/DataGridTable';
-import { PRIORITIES, PRIORITY_COLOR } from '@shared/types/task';
+import { PRIORITY_ORDER, PRIORITY_COLOR, Priority } from '@shared/types/task';
 import { ITask } from '@features/tasks/models/task';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import TaskUpsertDialog from '../TaskUpsertDialog/TaskUpsertDialog';
 import TaskDeleteDialog from '../TaskDeleteDialog/TaskDeleteDialog';
 import TaskCompletionChart from '../TaskCompletionChart/TaskCompletionChart';
+import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
 
 export function TaskGrid() {
-  const { t } = useTranslation('tasks');
+  const { t } = useTranslation(['common', 'tasks']);
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [isAddTaskDialogOpen, setIsAddTaskDialogOpen] = useState(false);
   const [updateTask, setUpdateTask] = useState<ITask | undefined>(undefined);
@@ -39,7 +40,7 @@ export function TaskGrid() {
 
   const priorityChipRenderer = (params: ICellRendererParams) => (
     <Chip 
-      label={params.value} 
+      label={getPriorityLabel(t, params.value as Priority)} 
       size="small" 
       variant='outlined'  
       color={PRIORITY_COLOR[params.value as keyof typeof PRIORITY_COLOR]} 
@@ -65,7 +66,7 @@ export function TaskGrid() {
       variant='contained'
       size='small'
       onClick={() => openUpdateTaskDialog(params)}>
-      Edit
+      {t('common:edit')}
     </Button>
   );
 
@@ -75,24 +76,23 @@ export function TaskGrid() {
       size='small'
       color='error'
       onClick={() => openDeleteTaskDialog(params)}>
-      Delete
+      {t('common:delete')}
     </Button>
   );
 
   const headers: ColDef<ITask>[] = [
-    { field: 'title', headerName: 'Title', minWidth: 180, filter: false, flex: 1, rowDrag: true},
-    { field: 'dueDate', headerName: 'Due Date', minWidth: 140, filter: false, flex: 1},
-    { field: 'priority', headerName: 'Priority', minWidth: 100, filter: 'agSetColumnFilter',
+    { field: 'title', headerName: t('common:title'), minWidth: 180, filter: false, flex: 1, rowDrag: true},
+    { field: 'dueDate', headerName: t('common:dueDate'), minWidth: 140, filter: false, flex: 1},
+    { field: 'priority', headerName: t('common:priority'), minWidth: 100, filter: 'agSetColumnFilter',
       cellRenderer: priorityChipRenderer,
       filterParams: {
-        values: PRIORITIES,
-        comparator: (a: string, b: string) => {
-          const order = ['Low', 'Medium', 'High'];
-          return order.indexOf(a) - order.indexOf(b);
+        values: PRIORITY_ORDER,
+        comparator: (a: Priority, b: Priority) => {
+          return PRIORITY_ORDER.indexOf(a) - PRIORITY_ORDER.indexOf(b);
         }
       }
     },
-    { field: 'completed', headerName: 'Completed', minWidth: 140,
+    { field: 'completed', headerName: t('common:completed'), minWidth: 140,
       cellRenderer: completedCheckboxRenderer
     },
     { field: undefined, headerName: "",  minWidth: 200,  filter: false,
