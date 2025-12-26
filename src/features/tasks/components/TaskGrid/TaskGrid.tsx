@@ -12,9 +12,16 @@ import TaskDeleteDialog from '../TaskDeleteDialog/TaskDeleteDialog';
 import TaskCompletionChart from '../TaskCompletionChart/TaskCompletionChart';
 import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
 
+//*
+import { loadCompletedMap, saveCompletedMap } from '@features/tasks/utils/completedStorage';
+
 export function TaskGrid() {
   const { t } = useTranslation(['common', 'tasks']);
+
   const [tasks, setTasks] = useState<ITask[]>([]);
+  //*
+  const [completedMap, setCompletedMap] = useState<Record<string, boolean>>(() => loadCompletedMap());
+
   const [isAddTaskDialogOpen, setIsAddTaskDialogOpen] = useState(false);
   const [updateTask, setUpdateTask] = useState<ITask | undefined>(undefined);
   const [deleteTask, setDeleteTask] = useState<ITask | undefined>(undefined);
@@ -26,17 +33,23 @@ export function TaskGrid() {
   const closeDeleteTaskDialog = () => setDeleteTask(undefined);
 
   useEffect(() => {
-    if (tasks.length) return;
-    const loadInitTasks = async () => {
+    const loadTasks = async () => {
       try {
-        const res = await TasksApi.get();
-        setTasks(res);
+        const initTasks = await TasksApi.get();
+        const persisted = loadCompletedMap();
+        
+        setTasks(
+          initTasks.map(task => ({
+            ...task,
+            completed: persisted[task.id] ?? task.completed
+          }))
+        );
       } catch (err) {
-        console.error('Failed to load initial tasks', err);
+        console.error('Failed to load tasks', err);
       }
     };
-    loadInitTasks();
-  }, [setTasks, tasks.length]);
+    loadTasks();
+  }, []);
 
   const priorityChipRenderer = (params: ICellRendererParams) => (
     <Chip 
@@ -48,17 +61,30 @@ export function TaskGrid() {
   );
 
   const completedCheckboxRenderer = (params: ICellRendererParams) => {
+    const id = params.data?.id;
+    if (!id) return null;
+    const checked = completedMap[id] ?? !!params.value;
+
     const onToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
       const next = e.target.checked;
-      const id = params.data?.id;
-      if (!id) return;
-      setTasks(prev => 
-        prev.map(t => t.id === id ? { ...t, completed: next } : t)
+
+      setTasks(prev =>
+        prev.map(t =>
+          t.id === id ? { ...t, completed: next } : t
+        )
       );
+
       params.node.setDataValue('completed', next);
       console.log(`Task ${params.data?.id} toggled: `, next);
+
+      setCompletedMap(prev => {
+        const updated = { ...prev, [id]: next };
+        saveCompletedMap(updated);
+        return updated;
+      });
     };
-    return <Checkbox checked={!!params.value} onChange={onToggle} />;
+
+    return <Checkbox checked={checked} onChange={onToggle} />;
   };
 
   const updateTaskButtonCellRenderer = (params: ICellRendererParams) => (
