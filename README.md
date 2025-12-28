@@ -29,7 +29,6 @@ kode** og en **realistisk utviklingsflyt** slik man jobber i profesjonelle team.
 - Express
 - TypeScript
 - REST API
-- JWT-basert autentisering (demo / utvikling)
 
 ---
 
@@ -43,27 +42,27 @@ kode** og en **realistisk utviklingsflyt** slik man jobber i profesjonelle team.
 
 ### Frontend
 Fra prosjektroten:
-npm install
-npx nx serve frontend-workspace
+- npm install
+- npx nx serve frontend-workspace
 
 Frontend kjører på:
 http://localhost:4200
 
 ### Backend
 Fra backend-mappen:
-cd backend
-npm install
-npm run dev
+- cd backend
+- npm install
+- npm run dev
 
 Backend kjører på:
 http://localhost:4000
 
 ## Fokus i prosjektet
-Skalerbar frontend-struktur
-Ryddig og tydelig API-design
-Klar separasjon mellom frontend og backend
-Sterk typing med TypeScript
-Kode skrevet for å være lesbar og vedlikeholdbar over tid
+- Skalerbar frontend-struktur
+- Ryddig og tydelig API-design
+- Klar separasjon mellom frontend og backend
+- Sterk typing med TypeScript
+- Kode skrevet for å være lesbar og vedlikeholdbar over tid
 
 ## Formål
 Prosjektet er laget for å simulere en realistisk fullstack-setup med
