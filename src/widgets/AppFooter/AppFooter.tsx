@@ -14,7 +14,7 @@ export function AppFooter() {
       }}
     >
       <Typography variant="body2" align="center">
-        © {new Date().getFullYear()} Sogelink Norway
+        © {new Date().getFullYear()} DemoSoft
       </Typography>
     </Box>
   );

@@ -51,7 +51,7 @@ export function AppHeader(props: AppHeaderProps) {
         </IconButton>
 
         <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
-          Sogelink Norway
+          DemoSoft
         </Typography>
 
         <LanguageToggle />

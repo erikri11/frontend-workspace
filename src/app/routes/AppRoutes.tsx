@@ -18,7 +18,7 @@ export function AppRoutes() {
     <Routes>
       <Route path='*' element={<Navigate to="/dashboard" replace />} />
       {CreateRoute("/dashboard", <TasksPage />, [userRole])}
-      {CreateRoute("/orders", <DashboardIcon />, [userRole])}
+      {CreateRoute("/orders", <DashboardIcon />, [userRole], RoleEnum.ADMIN)}
       {CreateRoute("/admin/products", <DashboardIcon />, [userRole], RoleEnum.ADMIN)}
       {CreateRoute("/admin/customers", <DashboardIcon />, [userRole], RoleEnum.ADMIN)}
     </Routes>
