@@ -12,6 +12,7 @@ kode** og en **realistisk utviklingsflyt** slik man jobber i profesjonelle team.
 - Backend: Node.js + Express + TypeScript  
 - Frontend og backend startes separat  
 - Kommunikasjon via REST API  
+- Storybook for dokumentasjon og utvikling av UI-komponenter
 
 ---
 
@@ -20,7 +21,7 @@ kode** og en **realistisk utviklingsflyt** slik man jobber i profesjonelle team.
 ### Frontend
 - React
 - TypeScript
-- Nx (brukes til frontend build og dev-server)
+- Nx (brukes til frontend build, dev-server og Storybook)
 - Komponentbasert arkitektur
 - Hooks-basert state-håndtering
 
@@ -29,6 +30,16 @@ kode** og en **realistisk utviklingsflyt** slik man jobber i profesjonelle team.
 - Express
 - TypeScript
 - REST API
+
+---
+
+## Live Storybook (Chromatic)
+
+UI-komponentene er publisert via **Chromatic**:
+
+https://689cdb84b3079772a029e4d2-srjnushxpg.chromatic.com/?path=/docs/shared-mui-button--docs
+
+Dette gir en interaktiv oversikt over komponenter, props og dokumentasjon.
 
 ---
 
@@ -56,6 +67,12 @@ Fra backend-mappen:
 
 Backend kjører på:
 http://localhost:4000
+
+---
+
+### UI / Dokumentasjon
+- Storybook
+- Chromatic (publisering av Storybook)
 
 ---
 
