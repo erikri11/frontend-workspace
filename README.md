@@ -66,6 +66,8 @@ http://localhost:4000
 - Sterk typing med TypeScript
 - Kode skrevet for å være lesbar og vedlikeholdbar over tid
 
+---
+
 ## Formål
 Prosjektet er laget for å simulere en realistisk fullstack-setup med
 uavhengig frontend og backend, tydelige kontrakter og struktur som tåler videre vekst.
