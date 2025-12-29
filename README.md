@@ -57,6 +57,8 @@ Fra backend-mappen:
 Backend kjører på:
 http://localhost:4000
 
+---
+
 ## Fokus i prosjektet
 - Skalerbar frontend-struktur
 - Ryddig og tydelig API-design
