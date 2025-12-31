@@ -2,17 +2,16 @@ import { FC, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import MenuItem from '@mui/material/MenuItem';
 import { FormControl, ListItemText } from '@mui/material';
-import Select, { SelectProps } from './select';
+import Select from './select';
 import { Checkbox } from '../Checkbox/checkbox';
 
-const meta: Meta<SelectProps> = {
+const meta: Meta<typeof Select> = {
   title: 'Shared/MUI/Select',
   component: Select,
   parameters: {
     layout: 'centered',
   },
   argTypes: {
-    onChange: { action: 'changed' },
     children: { control: false },
     sx: { control: false },
     classes: { control: false },
@@ -47,21 +46,21 @@ const meta: Meta<SelectProps> = {
     autoWidth: false,
     label: 'Age',
     size: 'small',
-    variant: 'filled'
+    variant: 'filled',
+    onChange: () => {}
   }
 };
 
 export default meta;
-
-type Story = StoryObj<SelectProps>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (
     <FormControl sx={{ width: 200}}>
       <Select {...args}>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty one</MenuItem>
-        <MenuItem value={30}>Thirty one and a half</MenuItem>
+        <MenuItem value={10}>10</MenuItem>
+        <MenuItem value={20}>20</MenuItem>
+        <MenuItem value={30}>30</MenuItem>
       </Select>
     </FormControl>
   )
@@ -85,7 +84,7 @@ export const ErrorState: Story = {
 
 // Separate component so we can safely use hooks
 const MultiSelectDemo: FC = () => {
-  const [value, setValue] = useState<any[]>([]);
+  const [value, setValue] = useState<string[]>([]);
 
   const options = [
     { id: 1, label: 'Apples' },
@@ -115,6 +114,6 @@ const MultiSelectDemo: FC = () => {
   );
 };
 
-export const MultiSelectExample: StoryObj = {
+export const MultiSelectExample: Story = {
   render: () => <MultiSelectDemo />,
 };

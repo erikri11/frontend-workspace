@@ -4,14 +4,13 @@ import SendIcon from '@mui/icons-material/Send';
 import UploadIcon from '@mui/icons-material/Upload';
 import Button, {GrayButton, type ButtonProps} from './Button';
 
-const meta: Meta<ButtonProps> = {
+const meta: Meta<typeof Button> = {
   title: 'Shared/MUI/Button',
   component: Button,
   parameters: {
     layout: 'centered',
   },
   argTypes: {
-    onClick: { action: 'clicked' },
     startIcon: { control: false },
     endIcon: { control: false },
     sx: { control: false },
@@ -33,13 +32,13 @@ const meta: Meta<ButtonProps> = {
     disabled: false,
     disableElevation: false,
     disableRipple: false,
-    fullWidth: false
+    fullWidth: false,
+    onClick: () => {}
   }
 };
 
 export default meta;
-
-type Story = StoryObj<ButtonProps>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {

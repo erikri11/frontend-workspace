@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Checkbox, CheckboxLabel, CheckboxProps } from './checkbox';
 
-const meta: Meta<CheckboxProps> = {
+const meta: Meta<typeof Checkbox> = {
    title: 'Shared/MUI/Checkbox',
   component: Checkbox,
   parameters: {
     layout: 'centered',
   },
   argTypes: {
-    onChange: {action: 'changed'},
     sx: { control: false },
     classes: { control: false },
     checkedIcon: { control: false },
@@ -29,13 +28,13 @@ const meta: Meta<CheckboxProps> = {
     checked: false,
     disabled: false,
     color: 'primary',
-    size: 'medium'
+    size: 'medium',
+    onChange: () => {}
   }
 };
 
 export default meta;
-
-type Story = StoryObj<CheckboxProps>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
