@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import UploadIcon from '@mui/icons-material/Upload';
-import Button, {GrayButton, type ButtonProps} from './Button';
+import Button, {GrayButton} from './Button';
 
 const meta: Meta<typeof Button> = {
   title: 'Shared/MUI/Button',
@@ -33,7 +33,7 @@ const meta: Meta<typeof Button> = {
     disableElevation: false,
     disableRipple: false,
     fullWidth: false,
-    onClick: () => {}
+    onClick: () => { /* empty */ }
   }
 };
 

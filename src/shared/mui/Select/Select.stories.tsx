@@ -5,7 +5,6 @@ import { FormControl, ListItemText } from '@mui/material';
 import Select from './select';
 import Checkbox from '../Checkbox/Checkbox';
 
-
 const meta: Meta<typeof Select> = {
   title: 'Shared/MUI/Select',
   component: Select,

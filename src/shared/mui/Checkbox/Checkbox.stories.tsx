@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox, CheckboxLabel, CheckboxProps } from './checkbox';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import Checkbox, { CheckboxLabel } from './Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
    title: 'Shared/MUI/Checkbox',
@@ -29,7 +29,7 @@ const meta: Meta<typeof Checkbox> = {
     disabled: false,
     color: 'primary',
     size: 'medium',
-    onChange: () => {}
+    onChange: () => { /* empty */ }
   }
 };
 
