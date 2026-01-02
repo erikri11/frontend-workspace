@@ -11,15 +11,15 @@ import TaskUpsertDialog from '../TaskUpsertDialog/TaskUpsertDialog';
 import TaskDeleteDialog from '../TaskDeleteDialog/TaskDeleteDialog';
 import TaskCompletionChart from '../TaskCompletionChart/TaskCompletionChart';
 import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
-
-//*
 import { loadCompletedMap, saveCompletedMap } from '@features/tasks/utils/completedStorage';
+import { TaskGridSkeleton } from './TaskGridSkeleton';
+import { TaskChartSkeleton } from './TaskChartSkeleton';
 
 export function TaskGrid() {
   const { t } = useTranslation(['common', 'tasks']);
+  const [loading, setLoading] = useState(true);
 
   const [tasks, setTasks] = useState<ITask[]>([]);
-  //*
   const [completedMap, setCompletedMap] = useState<Record<string, boolean>>(() => loadCompletedMap());
 
   const [isAddTaskDialogOpen, setIsAddTaskDialogOpen] = useState(false);
@@ -34,6 +34,7 @@ export function TaskGrid() {
 
   useEffect(() => {
     const loadTasks = async () => {
+      setLoading(true);
       try {
         const initTasks = await TasksApi.get();
         const persisted = loadCompletedMap();
@@ -46,6 +47,8 @@ export function TaskGrid() {
         );
       } catch (err) {
         console.error('Failed to load tasks', err);
+      } finally {
+        setLoading(false);
       }
     };
     loadTasks();
@@ -131,13 +134,22 @@ export function TaskGrid() {
 
   return (
     <>
-      <DataGridTable
-        data={tasks}
-        headers={headers}
-        isAddTaskButtonVisible={true}
-        onAddTaskClick={toggleAddTaskDialogOpen}
-      />
-
+      {loading ? 
+        <>
+          <TaskGridSkeleton />
+          <TaskChartSkeleton />
+        </> : 
+        <>
+          <DataGridTable
+            data={tasks}
+            headers={headers}
+            isAddTaskButtonVisible={true}
+            onAddTaskClick={toggleAddTaskDialogOpen}
+          />
+          <TaskCompletionChart tasks={tasks} />
+        </>
+      }
+    
       {isAddTaskDialogOpen &&
         <TaskUpsertDialog 
           open={isAddTaskDialogOpen}
@@ -163,8 +175,6 @@ export function TaskGrid() {
           deleteTask={deleteTask}
         />
       }
-
-      <TaskCompletionChart tasks={tasks} />
     </>
   );
 }
