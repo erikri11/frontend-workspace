@@ -34,10 +34,8 @@ kode** og en **realistisk utviklingsflyt** slik man jobber i profesjonelle team.
 ---
 
 ## Live Storybook (Chromatic)
-
 UI-komponentene er publisert via **Chromatic**:
-
-https://689cdb84b3079772a029e4d2-srjnushxpg.chromatic.com/?path=/docs/shared-mui-button--docs
+https://689cdb84b3079772a029e4d2-uzjoabaufa.chromatic.com/
 
 Dette gir en interaktiv oversikt over komponenter, props og dokumentasjon.
 
@@ -54,15 +52,14 @@ Dette gir en interaktiv oversikt over komponenter, props og dokumentasjon.
 ### Frontend
 Fra prosjektroten:
 - npm install
-- npx nx serve frontend-workspace
+- npm run start (npx nx serve frontend-workspace)
 
 Frontend kjører på:
 http://localhost:4200
 
 ### Backend
-Fra backend-mappen:
+Fra prosjektroten:
 - cd backend
-- npm install
 - npm run dev
 
 Backend kjører på:
