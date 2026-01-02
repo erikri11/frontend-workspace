@@ -9,7 +9,8 @@
     "test": "nx test",
     "build-storybook": "nx build-storybook frontend-workspace",
     "chromatic": "npx chromatic --project-token=chpt_468606abdf70054 --storybook-build-dir=storybook-static",
-    "test-storybook": "vitest --config vitest.storybook.config.ts --run"
+    "test-storybook": "vitest --config vitest.storybook.config.ts --run",
+    "storybook": "npx nx storybook frontend-workspace"
   },
   "nx": {
     "includedScripts": []
