@@ -1,11 +1,10 @@
-import type { Preview } from '@storybook/react';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import { theme } from '../src/shared/theme/mui/theme';
+import type { Preview } from "@storybook/react";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { theme } from "../src/shared/theme/mui/theme";
 
-import '@shared/styles/variables';
-import '@shared/styles/global';
+import "../src/shared/styles/variables.scss";
+import "../src/shared/styles/global";
 // import '@shared/theme/mui/theme.ts';
-
 const preview: Preview = {
   decorators: [
     (Story) => (
@@ -15,7 +14,7 @@ const preview: Preview = {
       </ThemeProvider>
     ),
   ],
-  tags: ['autodocs']
+  tags: ["autodocs"],
 };
 
 export default preview;

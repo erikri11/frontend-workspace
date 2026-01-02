@@ -1,9 +1,10 @@
 import { FC, useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import MenuItem from '@mui/material/MenuItem';
 import { FormControl, ListItemText } from '@mui/material';
 import Select from './select';
-import { Checkbox } from '../Checkbox/checkbox';
+import Checkbox from '../Checkbox/Checkbox';
+
 
 const meta: Meta<typeof Select> = {
   title: 'Shared/MUI/Select',
@@ -40,6 +41,7 @@ const meta: Meta<typeof Select> = {
     disabled: { control: false },
   },
   args: {
+    value: '',
     disabled: false,
     error: false,
     displayEmpty: true,
@@ -47,7 +49,7 @@ const meta: Meta<typeof Select> = {
     label: 'Age',
     size: 'small',
     variant: 'filled',
-    onChange: () => {}
+    onChange: () => { /* empty */ }
   }
 };
 
