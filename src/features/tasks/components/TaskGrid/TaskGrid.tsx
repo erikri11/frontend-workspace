@@ -13,7 +13,7 @@ import TaskCompletionChart from '../TaskCompletionChart/TaskCompletionChart';
 import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
 import { loadCompletedMap, saveCompletedMap } from '@features/tasks/utils/completedStorage';
 import { TaskGridSkeleton } from './TaskGridSkeleton';
-import { TaskChartSkeleton } from './TaskChartSkeleton';
+import { TaskCompletionChartSkeleton } from '../TaskCompletionChart/TaskCompletionChartSkeleton';
 
 export function TaskGrid() {
   const { t } = useTranslation(['common', 'tasks']);
@@ -137,7 +137,7 @@ export function TaskGrid() {
       {loading ? 
         <>
           <TaskGridSkeleton />
-          <TaskChartSkeleton />
+          <TaskCompletionChartSkeleton />
         </> : 
         <>
           <DataGridTable
