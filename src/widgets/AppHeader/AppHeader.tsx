@@ -13,7 +13,6 @@ export function AppHeader(props: AppHeaderProps) {
   const { mode, systemMode, setMode } = useColorScheme();
   if (!mode) return null;
 
-  // Resolve what the user actually sees
   const effectiveMode =
     mode === 'system' ? systemMode : mode;
 

@@ -35,7 +35,6 @@ export function App() {
           width: { sm: `calc(100% - ${DRAWER_WIDTH}px)` }
         }}
       >
-
         {/* Push content below AppBar */}
         <Toolbar />
 
