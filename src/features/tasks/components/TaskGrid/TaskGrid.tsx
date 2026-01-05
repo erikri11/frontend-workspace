@@ -1,12 +1,11 @@
 import './TaskGrid.module.scss';
-import { useEffect, useState} from 'react';
+import { useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Checkbox, Chip } from '@mui/material';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import DataGridTable from '@shared/components/DataGridTable/DataGridTable';
 import { PRIORITY_ORDER, PRIORITY_COLOR, Priority } from '@shared/types/task';
 import { ITask } from '@features/tasks/models/task';
-import { TasksApi } from '@features/tasks/services/tasksApi';
 import TaskUpsertDialog from '../TaskUpsertDialog/TaskUpsertDialog';
 import TaskDeleteDialog from '../TaskDeleteDialog/TaskDeleteDialog';
 import TaskCompletionChart from '../TaskCompletionChart/TaskCompletionChart';
@@ -14,12 +13,12 @@ import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
 import { loadCompletedMap, saveCompletedMap } from '@features/tasks/utils/completedStorage';
 import { TaskGridSkeleton } from './TaskGridSkeleton';
 import { TaskCompletionChartSkeleton } from '../TaskCompletionChart/TaskCompletionChartSkeleton';
+import { useTasks } from './useTasks';
 
 export function TaskGrid() {
   const { t } = useTranslation(['common', 'tasks']);
-  const [loading, setLoading] = useState(true);
 
-  const [tasks, setTasks] = useState<ITask[]>([]);
+  const { tasks, setTasks, loading } = useTasks();
   const [completedMap, setCompletedMap] = useState<Record<string, boolean>>(() => loadCompletedMap());
 
   const [isAddTaskDialogOpen, setIsAddTaskDialogOpen] = useState(false);
@@ -31,28 +30,6 @@ export function TaskGrid() {
   const closeUpdateTaskDialog = () => setUpdateTask(undefined);
   const openDeleteTaskDialog = (e: ICellRendererParams) => setDeleteTask(e.data);
   const closeDeleteTaskDialog = () => setDeleteTask(undefined);
-
-  useEffect(() => {
-    const loadTasks = async () => {
-      setLoading(true);
-      try {
-        const initTasks = await TasksApi.get();
-        const persisted = loadCompletedMap();
-        
-        setTasks(
-          initTasks.map(task => ({
-            ...task,
-            completed: persisted[task.id] ?? task.completed
-          }))
-        );
-      } catch (err) {
-        console.error('Failed to load tasks', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadTasks();
-  }, []);
 
   const priorityChipRenderer = (params: ICellRendererParams) => (
     <Chip 
@@ -76,9 +53,8 @@ export function TaskGrid() {
           t.id === id ? { ...t, completed: next } : t
         )
       );
-
+      
       params.node.setDataValue('completed', next);
-      console.log(`Task ${params.data?.id} toggled: `, next);
 
       setCompletedMap(prev => {
         const updated = { ...prev, [id]: next };
