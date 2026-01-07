@@ -1,33 +1,50 @@
-const API_BASE = '/api';
+import { env } from '@app/config/env';
+const API_BASE = env.apiBase;
 
-export async function makeRequest<T>(url: string, options?: RequestInit): Promise<T> {
-  const defaultOptions: RequestInit = {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'GET'
-  };
-  const finalOptions = { ...defaultOptions, ...options };
-  const res = await fetch(`${API_BASE}${url}`, finalOptions);
+export async function makeRequest<T>(url: string, options: RequestInit = {}): Promise<T> {
+  const method = (options.method ?? 'GET').toUpperCase();
+  const headers = new Headers(options.headers);
 
+  // Default to JSON Accept header
+  if (!headers.has('Accept')) headers.set('Accept', 'application/json');
+
+  // Only set JSON content-type when sending a JSON body
+  const hasBody = options.body !== undefined && method !== 'GET';
+  if (hasBody && !headers.has('Content-Type') && !(options.body instanceof FormData)) {
+    headers.set('Content-Type', 'application/json');
+  }
+
+  // Make the request
+  const res = await fetch(`${API_BASE}${url}`, {
+    ...options,
+    method,
+    headers,
+  });
+
+  // No Content
+  if (res.status === 204) return undefined as T;
+  
+  // Read response text
+  const text = await res.text().catch(() => '');
+
+  // Error
   if (!res.ok) {
     try {
-      const json = await res.json();
-      throw new Error(json?.error ?? `${res.status} ${res.statusText}`);
+      const json = text ? JSON.parse(text) : null;
+      const message = json?.error ?? json?.message ?? `${res.status} ${res.statusText}`;
+      throw new Error(message);
     } catch {
-        const text = await res.text().catch(() => '');
-        throw new Error(text || `${res.status} ${res.statusText}`);
-      }
+      throw new Error(text || `${res.status} ${res.statusText}`);
     }
+  }
 
-    if (res.status === 204) { 
-      return undefined as T 
-    }
+  // Handle non-JSON responses
+  const contentType = res.headers.get('content-type') ?? '';
+  if (!contentType.includes('application/json')) {
+    return (text || undefined) as unknown as T;
+  }
 
-    const contentType = res.headers.get('content-type') || '';
-    if (!contentType.includes('application/json')) {
-      const text = await res.text();
-      return (text || undefined) as T;
-    }
+  // Handle empty JSON body
+  return (text ? JSON.parse(text) : undefined) as T;
+}
 
-    const raw = await res.text();
-    return (raw ? JSON.parse(raw) : undefined) as T;
-  };
