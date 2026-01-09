@@ -15,7 +15,7 @@ export function BaseToolbar(props: BaseToolbarProps) {
   const search = (e: React.ChangeEvent<HTMLInputElement>) => props.setQuickFilter(e.target.value);
 
   return (
-    <Stack direction="row" spacing={2} className='mb-3'>
+    <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 2 }} className='mb-3'>
       <TextField
         label={t('common:search')}
         type="search"
