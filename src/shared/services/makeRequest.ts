@@ -47,4 +47,3 @@ export async function makeRequest<T>(url: string, options: RequestInit = {}): Pr
   // Handle empty JSON body
   return (text ? JSON.parse(text) : undefined) as T;
 }
-
