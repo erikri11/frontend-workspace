@@ -4,6 +4,7 @@ import { useColorScheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Brightness4, Brightness7, BrightnessAuto } from '@mui/icons-material';
 import LanguageToggle from '@shared/components/LanguageToggle/LanguageToggle';
+import { AppBarLogo } from './AppBarLogo';
 
 interface AppHeaderProps {
   onMenuClick: () => void;
@@ -39,6 +40,7 @@ export function AppHeader(props: AppHeaderProps) {
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
     >
       <Toolbar>
+        <AppBarLogo />
         <IconButton
           aria-label="open drawer"
           color="inherit"
