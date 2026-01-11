@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { UserRightsContext } from '@shared/context/userRightsContext';
+import { UserRightsContext } from '@shared/context/UserRightsContext';
 import { RoleEnum } from '@shared/enums/role';
 
 export function useUserRights() {

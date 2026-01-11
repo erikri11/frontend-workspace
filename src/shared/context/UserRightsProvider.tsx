@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useMemo, useState, useCallback } from 'react';
 import { RoleEnum } from '@shared/enums/role';
-import { UserRightsContext } from './userRightsContext';
+import { UserRightsContext } from './UserRightsContext';
 
 const STORAGE_KEY = 'demo.role';
 const initialRole = RoleEnum.USER;

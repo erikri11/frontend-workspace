@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { MenuItem } from "@shared/types/menu";
 import { DRAWER_WIDTH } from "@shared/constants/layout";
 import { useContext } from "react";
-import { UserRightsContext } from "@shared/context/userRightsContext";
+import { UserRightsContext } from "@shared/context/UserRightsContext";
 import { checkMenuAccess } from "@shared/utils/access";
 import React from "react";
 import { useTranslation } from "react-i18next";

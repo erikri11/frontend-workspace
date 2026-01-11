@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { RoleEnum } from "@shared/enums/role";
 import { lazy, Suspense, useContext } from "react";
-import { UserRightsContext } from "@shared/context/userRightsContext";
+import { UserRightsContext } from "@shared/context/UserRightsContext";
 import { CreateRoute } from "@shared/utils/access";
 import StoreIcon from '@mui/icons-material/Store';
 import InventoryIcon from '@mui/icons-material/Inventory';

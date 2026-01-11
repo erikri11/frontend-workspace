@@ -5,7 +5,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography }
 import { theme } from '@shared/theme/mui/theme';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import { ITask } from '@features/tasks/models/task';
-import { SnackbarContext } from '@shared/context/snackbarContext';
+import { SnackbarContext } from '@shared/context/SnackbarContext';
 
 export interface TaskDeleteDialogProps {
   open: boolean;

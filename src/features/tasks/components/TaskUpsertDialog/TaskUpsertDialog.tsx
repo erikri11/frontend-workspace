@@ -11,7 +11,7 @@ import { ITaskError } from '@features/tasks/models/taskError';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import { ITask } from '@features/tasks/models/task';
 import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
-import { SnackbarContext } from '@shared/context/snackbarContext';
+import { SnackbarContext } from '@shared/context/SnackbarContext';
 
 export interface TaskUpsertDialogProps {
   open: boolean;
