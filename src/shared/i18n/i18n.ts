@@ -7,6 +7,8 @@ import enMenu from '@shared/i18n/locales/en/menu.json';
 import nbMenu from '@shared/i18n/locales/nb/menu.json';
 import enTasks from '@shared/i18n/locales/en/tasks.json';
 import nbTasks from '@shared/i18n/locales/nb/tasks.json';
+import enError from '@shared/i18n/locales/en/error.json';
+import nbError from '@shared/i18n/locales/nb/error.json';
 
 i18n
   .use(initReactI18next)
@@ -21,16 +23,18 @@ i18n
       en: {
         common: enCommon,
         menu: enMenu,
-        tasks: enTasks
+        tasks: enTasks,
+        error: enError
       },
       nb: {
         common: nbCommon,
         menu: nbMenu,
-        tasks: nbTasks
+        tasks: nbTasks,
+        error: nbError
       }
     },
     defaultNS: 'common',
-    ns: ['common', 'menu', 'tasks']
+    ns: ['common', 'menu', 'tasks', 'error']
   });
 
 export default i18n;

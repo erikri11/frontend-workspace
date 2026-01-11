@@ -14,5 +14,9 @@
   "low": "Lav",
   "active": "Aktiv",
   "confirmDelete": "Bekreft sletting",
-  "confirmDeleteMessage": "Er du sikker på at du vil slette dette elementet?"
+  "confirmDeleteMessage": "Er du sikker på at du vil slette dette elementet?",
+  "user": "Bruker",
+  "administrator": "Administrator",
+  "goToDashboard": "Gå til dashbord",
+  "goBack": "Gå tilbake"
 }

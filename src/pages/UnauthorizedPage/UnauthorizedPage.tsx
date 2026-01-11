@@ -2,8 +2,10 @@ import './UnauthorizedPage.module.scss';
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useTranslation } from 'react-i18next';
 
 export function UnauthorizedPage() {
+  const { t } = useTranslation(['common', 'error']); 
   const navigate = useNavigate();
 
   return (
@@ -38,12 +40,15 @@ export function UnauthorizedPage() {
         </Box>
 
         <Typography variant="h4" component="h1" gutterBottom>
-          Access Denied
+          {t('error:accessDenied')}
+        </Typography>
+
+        <Typography variant="body1">
+          {t('error:youDoNotHavePermissionToViewThisPage')}
         </Typography>
 
         <Typography variant="body1" sx={{ mb: 3 }}>
-          Du har ikke rettigheter til å se denne siden.
-          Ta kontakt med en administrator hvis du mener dette er en feil.
+          {t('error:pleaseContactAnAdministratorIfYouBelieveThisIsAnError')}
         </Typography>
 
         <Button
@@ -51,10 +56,10 @@ export function UnauthorizedPage() {
           onClick={() => navigate("/dashboard")}
           sx={{ mr: 1 }}
         >
-          Gå til dashboard
+          {t('common:goToDashboard')}
         </Button>
         <Button variant="text" onClick={() => navigate(-1)}>
-          Gå tilbake
+          {t('common:goBack')}
         </Button>
       </Box>
     </Box>

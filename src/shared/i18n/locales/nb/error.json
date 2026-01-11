@@ -1,1 +1,5 @@
-{}
+{
+  "accessDenied": "Tilgang nektet",
+  "youDoNotHavePermissionToViewThisPage": "Du har ikke tillatelse til å se denne siden.",
+  "pleaseContactAnAdministratorIfYouBelieveThisIsAnError": "Vennligst kontakt en administrator hvis du mener dette er en feil."
+}
