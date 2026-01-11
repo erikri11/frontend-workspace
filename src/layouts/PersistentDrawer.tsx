@@ -3,10 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { MenuItem } from "@shared/types/menu";
 import { DRAWER_WIDTH } from "@shared/constants/layout";
 import { useContext } from "react";
-import { UserRightsContext } from "@shared/context/UserRightsContext";
+import { UserRightsContext } from "@shared/context/user-rights/UserRightsContext";
 import { checkMenuAccess } from "@shared/utils/access";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useUserRights } from "@shared/context/user-rights/useUserRights";
 
 interface PersistentDrawerProps {
   mobileOpen: boolean;
@@ -70,7 +71,7 @@ export function PersistentDrawer(props: PersistentDrawerProps) {
 }
 
 function PersistentDrawerContent(props: PersistentDrawerProps) {
-  const { role: userRole } = useContext(UserRightsContext);
+  const { role } = useUserRights();
   const location = useLocation();
   const { t } = useTranslation('menu');
 
@@ -96,7 +97,7 @@ function PersistentDrawerContent(props: PersistentDrawerProps) {
       >
         {props.menuItems.map((i, index) => (
           <React.Fragment key={index}>
-            {userRole && checkMenuAccess(
+            {role && checkMenuAccess(
               <ListItemButton
                 component={Link}
                 to={i.url}
@@ -107,7 +108,7 @@ function PersistentDrawerContent(props: PersistentDrawerProps) {
                 </ListItemIcon>
                 <ListItemText primary={t(i.textKey)} />
               </ListItemButton>,
-              [userRole]
+              [role]
             )}
           </React.Fragment>
         ))}

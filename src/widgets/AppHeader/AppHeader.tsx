@@ -7,7 +7,7 @@ import { Brightness4, Brightness7, BrightnessAuto } from '@mui/icons-material';
 import { AppBarLogo } from './AppBarLogo';
 import LanguageToggle from '@shared/components/LanguageToggle/LanguageToggle';
 import { RoleEnum } from '@shared/enums/role';
-import { useUserRights } from '@shared/context/useUserRights';
+import { useUserRights } from '@shared/context/user-rights/useUserRights';
 import { Select } from '@shared/mui/Select/Select';
 
 

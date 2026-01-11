@@ -24,7 +24,10 @@ export function UserRightsProvider({ children }: UserRightsProviderProps) {
     localStorage.setItem(STORAGE_KEY, newRole);
   }, []);
 
-  const value = useMemo(() => ({ role, setRole }), [role, setRole]);
+  const value = useMemo(
+    () => ({ role, setRole }), 
+    [role, setRole]
+  );
 
   return (
     <UserRightsContext.Provider value={value}>
