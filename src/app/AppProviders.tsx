@@ -4,10 +4,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { enUS, nb } from 'date-fns/locale';
 import { useTranslation } from 'react-i18next';
-import { UserRightsProvider } from '@shared/context/UserRightsProvider';
+import { UserRightsProvider } from '@shared/context/user-rights/UserRightsProvider';
 import { SnackbarMessage } from '@shared/types/snackbar';
 import { SnackbarHost } from '@shared/components/SnackbarHost/SnackbarHost';
-import { SnackbarContext } from '@shared/context/SnackbarContext';
+import { SnackbarContext } from '@shared/context/snackbar/SnackbarContext';
 
 export interface AppProvidersProps {
   children: ReactNode;

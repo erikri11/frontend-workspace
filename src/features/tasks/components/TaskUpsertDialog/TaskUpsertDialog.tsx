@@ -1,5 +1,5 @@
 import './TaskUpsertDialog.module.scss';
-import { ChangeEvent, useContext, useMemo, useState } from 'react';
+import { ChangeEvent, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
@@ -11,7 +11,7 @@ import { ITaskError } from '@features/tasks/models/taskError';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import { ITask } from '@features/tasks/models/task';
 import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
-import { SnackbarContext } from '@shared/context/SnackbarContext';
+import { useSnackbar } from '@shared/context/snackbar/useSnackbar';
 
 export interface TaskUpsertDialogProps {
   open: boolean;
@@ -27,8 +27,9 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
   const [dueDate, setDueDate] = useState<Date | null>(props.initialTasks ? new Date(props.initialTasks.dueDate) : null);
   const [priority, setPriority] = useState<Priority | ''>(props.initialTasks?.priority || '');
   const [errors, setErrors] = useState<ITaskError>({});
-  const { setSnackbarMessage } = useContext(SnackbarContext);
-
+  
+  const { setSnackbarMessage } = useSnackbar();
+  
   const canSubmit = useMemo(() => {
     const err = {
       title: validateTitle(title),

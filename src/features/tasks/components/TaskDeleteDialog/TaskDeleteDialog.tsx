@@ -1,11 +1,10 @@
 import './TaskDeleteDialog.module.scss';
-import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
 import { theme } from '@shared/theme/mui/theme';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import { ITask } from '@features/tasks/models/task';
-import { SnackbarContext } from '@shared/context/SnackbarContext';
+import { useSnackbar } from '@shared/context/snackbar/useSnackbar';
 
 export interface TaskDeleteDialogProps {
   open: boolean;
@@ -15,7 +14,8 @@ export interface TaskDeleteDialogProps {
 
 export function TaskDeleteDialog(props: TaskDeleteDialogProps) {
   const { t } = useTranslation(['common', 'tasks']);
-  const { setSnackbarMessage } = useContext(SnackbarContext);
+
+  const { setSnackbarMessage } = useSnackbar();
   
   const handleDeleteTask = async () => { 
     try {

@@ -1,10 +1,9 @@
 import './SnackbarHost.module.scss';
-import { useContext } from 'react';
 import { Alert, AlertColor, Snackbar } from '@mui/material';
-import { SnackbarContext } from '@shared/context/SnackbarContext';
+import { useSnackbar } from '@shared/context/snackbar/useSnackbar';
 
 export function SnackbarHost() {
-  const { snackbarMessage, setSnackbarMessage } = useContext(SnackbarContext);
+  const { snackbarMessage, setSnackbarMessage } = useSnackbar();
 
   return (
     <Snackbar
