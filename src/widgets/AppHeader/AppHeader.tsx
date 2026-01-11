@@ -1,16 +1,23 @@
 import './AppHeader.module.scss';
-import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { AppBar, IconButton, MenuItem, SelectChangeEvent, Toolbar, Typography } from '@mui/material';
 import { useColorScheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Brightness4, Brightness7, BrightnessAuto } from '@mui/icons-material';
-import LanguageToggle from '@shared/components/LanguageToggle/LanguageToggle';
 import { AppBarLogo } from './AppBarLogo';
+import LanguageToggle from '@shared/components/LanguageToggle/LanguageToggle';
+import { RoleEnum } from '@shared/enums/role';
+import { useUserRights } from '@shared/context/useUserRights';
+import { Select } from '@shared/mui/Select/Select';
+
 
 interface AppHeaderProps {
   onMenuClick: () => void;
 }
 
 export function AppHeader(props: AppHeaderProps) {
+  const { t } = useTranslation('common'); 
+  const { role, setRole } = useUserRights();
   const { mode, systemMode, setMode } = useColorScheme();
   if (!mode) return null;
 
@@ -34,6 +41,10 @@ export function AppHeader(props: AppHeaderProps) {
       : <Brightness4 />;
   };
 
+  const handleRoleChange = (e: SelectChangeEvent) => {
+    setRole(e.target.value as unknown as RoleEnum);
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -55,13 +66,34 @@ export function AppHeader(props: AppHeaderProps) {
           DemoSoft
         </Typography>
 
+        <Select
+          aria-label="Select role"
+          variant="filled"
+          size='small'
+          value={role}
+          onChange={handleRoleChange}
+          sx={{ 
+            mr: 2, 
+            minWidth: 140, 
+            display: { xs: 'none', sm: 'flex' },
+            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+            color: 'inherit',
+            '& .MuiSvgIcon-root': {
+              color: 'inherit',
+            }
+          }}
+        >
+          <MenuItem value={RoleEnum.USER}>{t('common:user')}</MenuItem>
+          <MenuItem value={RoleEnum.ADMIN}>{t('common:administrator')}</MenuItem>
+        </Select>
+        
         <LanguageToggle />
 
         <IconButton
+          aria-label="Toggle color scheme"
           color="inherit"
           onClick={handleToggle}
           sx={{ ml: 1 }}
-          aria-label="Toggle color scheme"
         >
           {renderIcon()}
         </IconButton>
