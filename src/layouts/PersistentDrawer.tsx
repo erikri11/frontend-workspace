@@ -74,7 +74,6 @@ function PersistentDrawerContent(props: PersistentDrawerProps) {
   const location = useLocation();
   const { t } = useTranslation('menu');
 
-  
   return (
     <Box
       sx={{
@@ -101,7 +100,7 @@ function PersistentDrawerContent(props: PersistentDrawerProps) {
               <ListItemButton
                 component={Link}
                 to={i.url}
-                selected={"/" + location.pathname.split("/")[1] === i.url}
+                selected={location.pathname === i.url || location.pathname.startsWith(i.url + '/')}
                 key={i.textKey}>
                 <ListItemIcon>
                   {i.icon}
