@@ -1,8 +1,8 @@
 import './TaskGrid.module.scss';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTasks } from './useTasks';
-import { createTaskGridColumns } from './taskGridColumns';
+import { useTasks } from '../../hooks/useTasks';
+import { createTaskGridColumns } from './createTaskGridColumns';
 import { useCompletedMap } from './useCompletionMap';
 import DataGridTable from '@shared/components/DataGridTable/DataGridTable';
 import { ITask } from '@features/tasks/models/task';

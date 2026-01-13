@@ -1,11 +1,11 @@
 import './TaskCompletionChart.module.scss';
 import { useTranslation } from 'react-i18next';
-import { Box, Paper, Typography, useTheme } from '@mui/material';
-import { Priority, PRIORITY_ORDER } from '@shared/types/task';
-import { ITask } from '@features/tasks/models/task';
 import { useMemo } from 'react';
+import { Box, Paper, Typography, useTheme } from '@mui/material';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
+import { Priority, PRIORITY_ORDER } from '@features/tasks/models/priority';
+import { ITask } from '@features/tasks/models/task';
+import { getTaskPriorityLabel } from '@features/tasks/utils/getTaskPriorityLabel';
 
 interface TaskCompletionChartProps {
   tasks: ITask[];
@@ -38,7 +38,7 @@ export function TaskCompletionChart(props: TaskCompletionChartProps) {
             {
               scaleType: 'band',
               data: Array.from(PRIORITY_ORDER, 
-                (p: Priority) => getPriorityLabel(t, p))
+                (p: Priority) => getTaskPriorityLabel(t, p))
             }
           ]}
           series={[

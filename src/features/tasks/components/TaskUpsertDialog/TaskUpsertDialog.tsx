@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { format} from 'date-fns';
-import { PRIORITY_ORDER, Priority } from '@shared/types/task';
+import { Priority, PRIORITY_ORDER } from '@features/tasks/models/priority';
 import { validateDueDate, validatePriority, validateTitle } from '@features/tasks/validation/validateTask';
 import { Mode } from '@features/tasks/models/mode';
 import { ITaskError } from '@features/tasks/models/taskError';
 import { TasksApi } from '@features/tasks/services/tasksApi';
 import { ITask } from '@features/tasks/models/task';
-import { getPriorityLabel } from '@features/tasks/utils/priorityLabel';
+import { getTaskPriorityLabel } from '@features/tasks/utils/getTaskPriorityLabel';
 import { useSnackbar } from '@shared/context/snackbar/useSnackbar';
 
 export interface TaskUpsertDialogProps {
@@ -113,7 +113,7 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
                   }}
                 />
                 <FormControl fullWidth error={!!errors.priority}>
-                  <InputLabel id="priority-label">Prioritet</InputLabel>
+                  <InputLabel id="priority-label">{t('common:priority')}</InputLabel>
                   <Select
                     labelId="priority-label"
                     label={t('common:priority')}
@@ -123,7 +123,7 @@ export function TaskUpsertDialog(props: TaskUpsertDialogProps) {
                     <MenuItem value="" disabled><em>{t('tasks:selectAPriority')}</em></MenuItem>
                     {PRIORITY_ORDER.map((p: Priority) => (
                       <MenuItem key={p} value={p}>
-                        {getPriorityLabel(t, p)}
+                        {getTaskPriorityLabel(t, p)}
                       </MenuItem>
                     ))}
                   </Select>
