@@ -1,3 +1,4 @@
+import { CurrencyEnum } from "./currency";
 import { OrderStatus } from "./orderStatus";
 
 export interface IOrder {
@@ -7,4 +8,5 @@ export interface IOrder {
   totalAmount: number;
   status: OrderStatus;
   createdAt: string;
+  currency?: CurrencyEnum;
 }
