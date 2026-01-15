@@ -1,12 +1,20 @@
 import app from '../app';
 import { v4 as uuidv4 } from 'uuid';
 import { validateCreate, validateUpdate } from '../validators/tasksValidate';
+import { ITask } from '../models/task';
 
-let tasks = [
-  { id: uuidv4(), title: 'Design wireframes',  dueDate: '2025-10-07', priority: 'High',   completed: false },
-  { id: uuidv4(), title: 'Write API contract', dueDate: '2025-10-10', priority: 'Medium', completed: false },
-  { id: uuidv4(), title: 'QA regression',      dueDate: '2025-10-15', priority: 'Low',    completed: true  },
-];
+let tasks: ITask[] = [
+  { id: uuidv4(), title: 'Design wireframes',             dueDate: '2025-10-07', priority: 'High',   completed: false },
+  { id: uuidv4(), title: 'Write API contract',            dueDate: '2025-10-10', priority: 'Medium', completed: false },
+  { id: uuidv4(), title: 'QA regression',                 dueDate: '2025-10-15', priority: 'Low',    completed: true  },
+  { id: uuidv4(), title: 'Implement authentication flow', dueDate: '2025-10-18', priority: 'High',   completed: false },
+  { id: uuidv4(), title: 'Create task filtering UI',      dueDate: '2025-10-20', priority: 'Medium', completed: false },
+  { id: uuidv4(), title: 'Refactor task service layer',   dueDate: '2025-10-22', priority: 'Low',    completed: false },
+  { id: uuidv4(), title: 'Add unit tests for TaskGrid',   dueDate: '2025-10-25', priority: 'High',   completed: false },
+  { id: uuidv4(), title: 'Improve accessibility (a11y)',  dueDate: '2025-10-27', priority: 'Medium', completed: true  },
+  { id: uuidv4(), title: 'Optimize API performance',      dueDate: '2025-10-30', priority: 'High',   completed: false },
+  { id: uuidv4(), title: 'Update project documentation',  dueDate: '2025-11-02', priority: 'Low',    completed: true  }
+  ];
 
 app.get('/tasks', (req, res) => {
   res.json(tasks);
@@ -23,7 +31,7 @@ app.post('/tasks', (req, res) => {
   if (err) return res.status(400).json({ error: err });
 
   const { title, dueDate, priority, completed = false } = req.body;
-  const task = { id: uuidv4(), title: title.trim(), dueDate, priority, completed: !!completed };
+  const task: ITask = { id: uuidv4(), title: title.trim(), dueDate, priority, completed: !!completed };
   tasks.unshift(task);
   res.status(201).json(task);
 });
@@ -35,8 +43,8 @@ app.put('/tasks/:id', (req, res) => {
   const err = validateUpdate(req.body, false);
   if (err) return res.status(400).json({ error: err });
 
-  const { title, dueDate, priority, completed } = req.body;
-  tasks[idx] = { ...tasks[idx], title: title.trim(), dueDate, priority, completed };
+  const { title, dueDate, priority, completed = false } = req.body;
+  tasks[idx] = { ...tasks[idx], title: title.trim(), dueDate, priority, completed: !!completed };
   res.json(tasks[idx]);
 });
 
