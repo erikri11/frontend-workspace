@@ -11,6 +11,10 @@ import enTasks from '@shared/i18n/locales/en/tasks.json';
 import nbTasks from '@shared/i18n/locales/nb/tasks.json';
 import enOrders from '@shared/i18n/locales/en/orders.json';
 import nbOrders from '@shared/i18n/locales/nb/orders.json';
+import enProducts from '@shared/i18n/locales/en/products.json';
+import nbProducts from '@shared/i18n/locales/nb/products.json';
+import enCustomers from '@shared/i18n/locales/en/customers.json';
+import nbCustomers from '@shared/i18n/locales/nb/customers.json';
 
 i18n
   .use(initReactI18next)
@@ -27,7 +31,9 @@ i18n
         error: enError,
         menu: enMenu,
         tasks: enTasks,
-        orders: enOrders
+        orders: enOrders,
+        products: enProducts,
+        customers: enCustomers
        
       },
       nb: {
@@ -35,12 +41,13 @@ i18n
         error: nbError,
         menu: nbMenu,
         tasks: nbTasks,
-        orders: nbOrders
-        
+        orders: nbOrders,
+        products: nbProducts,
+        customers: nbCustomers
       }
     },
     defaultNS: 'common',
-    ns: ['common', 'error', 'menu', 'tasks', 'orders']
+    ns: ['common', 'error', 'menu', 'tasks', 'orders', 'products', 'customers']
   });
 
 export default i18n;
