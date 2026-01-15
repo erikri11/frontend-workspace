@@ -1,4 +1,4 @@
-import { Priority } from "@shared/types/task";
+import { Priority } from "./priority";
 
 export interface ITask {
   id: string;

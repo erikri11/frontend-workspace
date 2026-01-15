@@ -5,7 +5,7 @@ import { loadCompletedMap } from '@features/tasks/utils/completedStorage';
 
 export function useTasks() {
   const [tasks, setTasks] = useState<ITask[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const loadTasks = async () => {

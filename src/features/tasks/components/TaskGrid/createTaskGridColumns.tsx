@@ -16,41 +16,46 @@ interface ColumnArgsProps {
 }
 
 export function createTaskGridColumns(props: ColumnArgsProps): ColDef<ITask>[] {
+  const { t, completedMap, onToggleCompleted, onEdit, onDelete } = props;
 
   const completedRenderer = createCompletedRenderer({
-    completedMap: props.completedMap,
-    onToggleCompleted: props.onToggleCompleted
+    completedMap: completedMap,
+    onToggleCompleted: onToggleCompleted
   });
 
   const editRenderer = createActionButtonRenderer({
-    t: props.t,
+    t: t,
     labelKey: 'common:edit',
-    onClick: props.onEdit,
+    onClick: onEdit,
   });
 
   const deleteRenderer = createActionButtonRenderer({
-    t: props.t,
+    t: t,
     labelKey: 'common:delete',
-    onClick: props.onDelete,
+    onClick: onDelete,
     buttonProps: { color: 'error' },
   });
 
   return [
     {
+      field: 'id',
+      headerName: t('common:id'),
+      minWidth: 180
+    },
+    {
       field: 'title',
-      headerName: props.t('common:title'),
-      flex: 1,
+      headerName: t('common:title'),
       minWidth: 180,
-      rowDrag: true
+      flex: 1
     },
     {
       field: 'dueDate',
-      headerName: props.t('common:dueDate'),
+      headerName: t('common:dueDate'),
       minWidth: 140
     },
     {
       field: 'priority',
-      headerName: props.t('common:priority'),
+      headerName: t('common:priority'),
       minWidth: 120,
       cellRenderer: priorityRenderer,
       filter: 'agSetColumnFilter',
@@ -62,7 +67,7 @@ export function createTaskGridColumns(props: ColumnArgsProps): ColDef<ITask>[] {
     },
     {
       field: 'completed',
-      headerName: props.t('common:completed'),
+      headerName: t('common:completed'),
       minWidth: 140,
       cellRenderer: completedRenderer
     },
