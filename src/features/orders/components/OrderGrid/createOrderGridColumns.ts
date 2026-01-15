@@ -35,12 +35,14 @@ export function createOrderGridColumns(props: ColumnArgsProps): ColDef<IOrder>[]
       field: 'totalAmount',
       headerName: t('orders:totalAmount'),
       minWidth: 120,
+      type: 'rightAligned',
       valueFormatter: currencyValueFormatter
     },
     {
       field: 'status',
       headerName: t('orders:status'),
       minWidth: 140,
+      type: 'rightAligned',
       cellRenderer: orderStatusRenderer,
       filter: 'agSetColumnFilter',
       comparator: orderStatusCompare,
@@ -53,6 +55,7 @@ export function createOrderGridColumns(props: ColumnArgsProps): ColDef<IOrder>[]
       field: 'createdAt',
       headerName: t('orders:createdAt'),
       minWidth: 140,
+      type: 'rightAligned',
       valueFormatter: createdAtFormatter
     }
   ];
