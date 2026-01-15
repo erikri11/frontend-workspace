@@ -18,5 +18,6 @@
   "user": "User",
   "administrator": "Administrator",
   "goToDashboard": "Go to Dashboard",
-  "goBack": "Go Back"
+  "goBack": "Go Back",
+  "id": "ID"
 }
