@@ -1,41 +1,32 @@
 import { useMemo } from 'react';
-import {ColDef, ModuleRegistry, AllCommunityModule, GridApi, GridReadyEvent} from 'ag-grid-community';
+import {ColDef, GridApi, GridReadyEvent} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { LicenseManager, SetFilterModule } from 'ag-grid-enterprise';
 import { Box } from '@mui/material';
-import { useColorScheme } from '@mui/material/styles';
-import { baseTableTheme } from '@shared/theme/agGrid/baseTable';
+import { defaultColDefBase, paginationPageSizeSelectorBase } from './baseTableDefaults';
+import { useAgTheme } from './useAgTheme';
+import { setupAgGrid } from './agGridSetup';
 
-ModuleRegistry.registerModules([AllCommunityModule, SetFilterModule]);
-LicenseManager.setLicenseKey('LICENSE_KEY_HERE');
+setupAgGrid();
 
-interface DashboardLayoutProps<T> {
+interface BaseTableProps<T> {
   data: T[];
   headers: ColDef<T>[];
   gridApi: GridApi | null;
   setGridApi: (gridApi: GridApi | null) => void;
 }
 
-export default function BaseTable<T>(props: DashboardLayoutProps<T>) {
-  const { mode, systemMode } = useColorScheme();
+export default function BaseTable<T>(props: BaseTableProps<T>) {
+  const agTheme = useAgTheme();
   const onGridReady = (params: GridReadyEvent) => props.setGridApi(params.api);
 
-  // Always resolve to a valid mode (never undefined)
-  const effectiveMode: 'light' | 'dark' = useMemo(() => {
-    if (mode === 'dark') return 'dark';
-    if (mode === 'light') return 'light';
-
-    return systemMode === 'dark' ? 'dark' : 'light';
-  },[mode, systemMode]);
-
-  const agTheme = useMemo(() => baseTableTheme(effectiveMode), [effectiveMode]);
-
-  const defaultColDef = useMemo<ColDef<T>>(() => ({
-      sortable: true,
-      filter: true,
-      resizable: true,
-      flex: 1,
-    }),[]
+  const defaultColDef = useMemo<ColDef<T>>(
+    () => defaultColDefBase as ColDef<T>,
+    []
+  );
+  
+  const paginationPageSizeSelector = useMemo<number[] | boolean>(
+    () => [...paginationPageSizeSelectorBase],
+    []
   );
 
   return (
@@ -48,9 +39,11 @@ export default function BaseTable<T>(props: DashboardLayoutProps<T>) {
         animateRows={true}
         rowHeight={50}
         headerHeight={48}
-        rowDragManaged={true}
         onGridReady={onGridReady}
         domLayout={'autoHeight'}
+        pagination={true}
+        paginationPageSize={5}
+        paginationPageSizeSelector={paginationPageSizeSelector}
       />
     </Box>
   );
