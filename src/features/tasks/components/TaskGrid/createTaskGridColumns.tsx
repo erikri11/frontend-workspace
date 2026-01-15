@@ -51,12 +51,14 @@ export function createTaskGridColumns(props: ColumnArgsProps): ColDef<ITask>[] {
     {
       field: 'dueDate',
       headerName: t('common:dueDate'),
-      minWidth: 140
+      minWidth: 140,
+      type: 'rightAligned',
     },
     {
       field: 'priority',
       headerName: t('common:priority'),
       minWidth: 120,
+      type: 'rightAligned',
       cellRenderer: priorityRenderer,
       filter: 'agSetColumnFilter',
       comparator: taskPriorityCompare,
@@ -69,6 +71,7 @@ export function createTaskGridColumns(props: ColumnArgsProps): ColDef<ITask>[] {
       field: 'completed',
       headerName: t('common:completed'),
       minWidth: 140,
+      cellStyle: {textAlign: 'center'},
       cellRenderer: completedRenderer
     },
     {
