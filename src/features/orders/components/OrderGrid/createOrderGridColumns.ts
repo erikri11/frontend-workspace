@@ -3,6 +3,7 @@ import { ColDef } from 'ag-grid-community';
 import { orderStatusRenderer } from './renderers/orderStatusRenderer';
 import { orderStatusCompare } from './comparators/orderStatusCompare';
 import { createdAtFormatter } from './formatters/createdAtFormatter';
+import { currencyValueFormatter } from './formatters/currencyValueFormatter';
 import { IOrder } from '../../models/order';
 import { ORDER_STATUSES } from '../../models/orderStatus';
 
@@ -11,28 +12,34 @@ interface ColumnArgsProps {
 }
 
 export function createOrderGridColumns(props: ColumnArgsProps): ColDef<IOrder>[] {
+  const { t } = props;
 
   return [
     {
+      field: 'id',
+      headerName: t('common:id'),
+      minWidth: 180
+    },
+    {
       field: 'orderNumber',
-      headerName: props.t('common:title'),
-      flex: 1,
-      minWidth: 180,
-      rowDrag: true
+      headerName: t('common:title'),
+      minWidth: 180
     },
     {
       field: 'customerName',
-      headerName: props.t('orders:customerName'),
-      minWidth: 140
+      headerName: t('orders:customerName'),
+      minWidth: 140,
+      flex: 1
     },
     {
       field: 'totalAmount',
-      headerName: props.t('orders:totalAmount'),
-      minWidth: 120
+      headerName: t('orders:totalAmount'),
+      minWidth: 120,
+      valueFormatter: currencyValueFormatter
     },
     {
       field: 'status',
-      headerName: props.t('orders:status'),
+      headerName: t('orders:status'),
       minWidth: 140,
       cellRenderer: orderStatusRenderer,
       filter: 'agSetColumnFilter',
@@ -44,7 +51,7 @@ export function createOrderGridColumns(props: ColumnArgsProps): ColDef<IOrder>[]
     },
     {
       field: 'createdAt',
-      headerName: props.t('orders:createdAt'),
+      headerName: t('orders:createdAt'),
       minWidth: 140,
       valueFormatter: createdAtFormatter
     }
